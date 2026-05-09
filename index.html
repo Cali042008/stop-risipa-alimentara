@@ -1,1 +1,254 @@
-PLACEHOLDER_HTML
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stop Risipa Alimentară - Caravana</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-stop">ST<span class="o-icon">⊗</span>P</span>
+        <span class="logo-sub">STOP RISIPA</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#">ACASĂ</a></li>
+        <li><a href="#" class="active">CARAVANA<br><small>"FĂRĂ RISIPĂ"</small></a></li>
+        <li><a href="#">DESPRE RISIPĂ</a></li>
+        <li><a href="#">SFATURI &amp; REȚETE</a></li>
+        <li><a href="#">IMPLICĂ-TE</a></li>
+        <li><a href="#">CONTACT</a></li>
+      </ul>
+      <a href="#" class="btn-donate">DONEAZĂ ACUM</a>
+    </div>
+  </nav>
+
+  <section class="hero-caravana">
+    <h1>URMĂREȘTE TRASEUL CARAVANEI</h1>
+  </section>
+
+  <section class="harta-section">
+    <h2>HARTĂ INTERACTIVĂ ROMÂNIA</h2>
+    <div class="harta-wrapper">
+      <div class="harta-container">
+
+        <!-- Harta reala Romania - imagine externa -->
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Flag-map_of_Romania.svg/1200px-Flag-map_of_Romania.svg.png"
+          onerror="this.src='https://raw.githubusercontent.com/djaiss/mapsicon/master/all/ro/vector.svg'"
+          class="romania-img" alt="Harta Romania" id="romania-img"
+        />
+
+        <!-- Ruta punctata SVG overlay -->
+        <svg class="route-overlay" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="21,54 43,55 40,37 72,32 57,70"
+            fill="none" stroke="#e8801a" stroke-width="0.9"
+            stroke-dasharray="2.5,1.8" opacity="0.9"/>
+        </svg>
+
+        <!-- TIMISOARA -->
+        <div class="city-pin past" style="left:21%;top:54%;">
+          <div class="caravan-wrap grayscale">
+            <svg viewBox="0 0 110 72" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="16" width="78" height="38" rx="11" fill="#7ec850" stroke="#2d6010" stroke-width="3"/>
+              <rect x="7" y="10" width="72" height="8" rx="4" fill="#5aaa2a" stroke="#2d6010" stroke-width="2"/>
+              <rect x="13" y="24" width="29" height="20" rx="3" fill="#2d6010" stroke="#1a400a" stroke-width="2"/>
+              <polygon points="13,24 42,24 46,17 9,17" fill="#9ad050" stroke="#2d6010" stroke-width="1.5"/>
+              <path d="M64,30 C64,25 57,23 57,30 C57,23 50,25 50,30 C50,37 57,43 57,43 C57,43 64,37 64,30Z" fill="white" stroke="#2d6010" stroke-width="1.5"/>
+              <line x1="54" y1="28" x2="54" y2="41" stroke="#2d6010" stroke-width="1.5"/>
+              <line x1="60" y1="28" x2="60" y2="41" stroke="#2d6010" stroke-width="1.5"/>
+              <rect x="4" y="46" width="78" height="8" fill="white"/>
+              <rect x="80" y="30" width="22" height="3" rx="1" fill="#2d6010"/>
+              <rect x="80" y="25" width="3" height="13" rx="1" fill="#2d6010"/>
+              <circle cx="103" cy="32" r="4" fill="#2d6010" stroke="white" stroke-width="1.5"/>
+              <circle cx="26" cy="60" r="10" fill="#2d6010" stroke="white" stroke-width="2.5"/>
+              <circle cx="26" cy="60" r="4.5" fill="#c8f090"/>
+              <circle cx="58" cy="60" r="10" fill="#2d6010" stroke="white" stroke-width="2.5"/>
+              <circle cx="58" cy="60" r="4.5" fill="#c8f090"/>
+            </svg>
+          </div>
+          <span class="pin-label">Timișoara</span>
+          <div class="pin-tooltip">
+            <div class="tt-status past-color">✅ Stop finalizat</div>
+            <div class="tt-city">Timișoara</div>
+            <div class="tt-row">📅 <b>Data:</b> 1-5 Mai</div>
+            <div class="tt-row">🕙 <b>Ora:</b> 10:00–14:00</div>
+            <div class="tt-desc">Stop finalizat cu succes! 320 kg alimente donate.</div>
+          </div>
+        </div>
+
+        <!-- SIBIU LIVE -->
+        <div class="city-pin current live-pin" style="left:43%;top:55%;">
+          <div class="live-badge">● LIVE</div>
+          <div class="caravan-wrap">
+            <svg viewBox="0 0 110 72" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="16" width="78" height="38" rx="11" fill="#7ec850" stroke="#2d6010" stroke-width="3"/>
+              <rect x="7" y="10" width="72" height="8" rx="4" fill="#5aaa2a" stroke="#2d6010" stroke-width="2"/>
+              <rect x="13" y="24" width="29" height="20" rx="3" fill="#2d6010" stroke="#1a400a" stroke-width="2"/>
+              <polygon points="13,24 42,24 46,17 9,17" fill="#9ad050" stroke="#2d6010" stroke-width="1.5"/>
+              <path d="M64,30 C64,25 57,23 57,30 C57,23 50,25 50,30 C50,37 57,43 57,43 C57,43 64,37 64,30Z" fill="white" stroke="#2d6010" stroke-width="1.5"/>
+              <line x1="54" y1="28" x2="54" y2="41" stroke="#2d6010" stroke-width="1.5"/>
+              <line x1="60" y1="28" x2="60" y2="41" stroke="#2d6010" stroke-width="1.5"/>
+              <rect x="4" y="46" width="78" height="8" fill="white"/>
+              <rect x="80" y="30" width="22" height="3" rx="1" fill="#2d6010"/>
+              <rect x="80" y="25" width="3" height="13" rx="1" fill="#2d6010"/>
+              <circle cx="103" cy="32" r="4" fill="#2d6010" stroke="white" stroke-width="1.5"/>
+              <circle cx="26" cy="60" r="10" fill="#2d6010" stroke="white" stroke-width="2.5"/>
+              <circle cx="26" cy="60" r="4.5" fill="#c8f090"/>
+              <circle cx="58" cy="60" r="10" fill="#2d6010" stroke="white" stroke-width="2.5"/>
+              <circle cx="58" cy="60" r="4.5" fill="#c8f090"/>
+            </svg>
+          </div>
+          <span class="pin-label live-label">Sibiu</span>
+          <div class="pin-tooltip">
+            <div class="tt-status live-color">🟢 LIVE ACUM</div>
+            <div class="tt-city">Sibiu</div>
+            <div class="tt-row">📅 <b>Data:</b> 15 Mai</div>
+            <div class="tt-row">🕙 <b>Ora:</b> 10:00–14:00</div>
+            <div class="tt-desc">ACUM AICI! Piața Mare, Sibiu. Vino să donezi!</div>
+          </div>
+        </div>
+
+        <!-- CLUJ -->
+        <div class="city-pin future" style="left:40%;top:37%;">
+          <div class="caravan-wrap orange-tint">
+            <svg viewBox="0 0 110 72" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="16" width="78" height="38" rx="11" fill="#7ec850" stroke="#2d6010" stroke-width="3"/>
+              <rect x="7" y="10" width="72" height="8" rx="4" fill="#5aaa2a" stroke="#2d6010" stroke-width="2"/>
+              <rect x="13" y="24" width="29" height="20" rx="3" fill="#2d6010" stroke="#1a400a" stroke-width="2"/>
+              <polygon points="13,24 42,24 46,17 9,17" fill="#9ad050" stroke="#2d6010" stroke-width="1.5"/>
+              <path d="M64,30 C64,25 57,23 57,30 C57,23 50,25 50,30 C50,37 57,43 57,43 C57,43 64,37 64,30Z" fill="white" stroke="#2d6010" stroke-width="1.5"/>
+              <line x1="54" y1="28" x2="54" y2="41" stroke="#2d6010" stroke-width="1.5"/>
+              <line x1="60" y1="28" x2="60" y2="41" stroke="#2d6010" stroke-width="1.5"/>
+              <rect x="4" y="46" width="78" height="8" fill="white"/>
+              <rect x="80" y="30" width="22" height="3" rx="1" fill="#2d6010"/>
+              <rect x="80" y="25" width="3" height="13" rx="1" fill="#2d6010"/>
+              <circle cx="103" cy="32" r="4" fill="#2d6010" stroke="white" stroke-width="1.5"/>
+              <circle cx="26" cy="60" r="10" fill="#2d6010" stroke="white" stroke-width="2.5"/>
+              <circle cx="26" cy="60" r="4.5" fill="#c8f090"/>
+              <circle cx="58" cy="60" r="10" fill="#2d6010" stroke="white" stroke-width="2.5"/>
+              <circle cx="58" cy="60" r="4.5" fill="#c8f090"/>
+            </svg>
+          </div>
+          <span class="pin-label">Cluj-Napoca</span>
+          <div class="pin-tooltip">
+            <div class="tt-status future-color">🟠 Stop viitor</div>
+            <div class="tt-city">Cluj-Napoca</div>
+            <div class="tt-row">📅 <b>Data:</b> 22 Mai</div>
+            <div class="tt-row">🕙 <b>Ora:</b> 10:00–15:00</div>
+            <div class="tt-desc">Următorul stop! Ne vedem în Cluj-Napoca.</div>
+          </div>
+        </div>
+
+        <!-- IASI -->
+        <div class="city-pin future" style="left:72%;top:32%;">
+          <div class="caravan-wrap orange-tint">
+            <svg viewBox="0 0 110 72" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="16" width="78" height="38" rx="11" fill="#7ec850" stroke="#2d6010" stroke-width="3"/>
+              <rect x="7" y="10" width="72" height="8" rx="4" fill="#5aaa2a" stroke="#2d6010" stroke-width="2"/>
+              <rect x="13" y="24" width="29" height="20" rx="3" fill="#2d6010" stroke="#1a400a" stroke-width="2"/>
+              <polygon points="13,24 42,24 46,17 9,17" fill="#9ad050" stroke="#2d6010" stroke-width="1.5"/>
+              <path d="M64,30 C64,25 57,23 57,30 C57,23 50,25 50,30 C50,37 57,43 57,43 C57,43 64,37 64,30Z" fill="white" stroke="#2d6010" stroke-width="1.5"/>
+              <line x1="54" y1="28" x2="54" y2="41" stroke="#2d6010" stroke-width="1.5"/>
+              <line x1="60" y1="28" x2="60" y2="41" stroke="#2d6010" stroke-width="1.5"/>
+              <rect x="4" y="46" width="78" height="8" fill="white"/>
+              <rect x="80" y="30" width="22" height="3" rx="1" fill="#2d6010"/>
+              <rect x="80" y="25" width="3" height="13" rx="1" fill="#2d6010"/>
+              <circle cx="103" cy="32" r="4" fill="#2d6010" stroke="white" stroke-width="1.5"/>
+              <circle cx="26" cy="60" r="10" fill="#2d6010" stroke="white" stroke-width="2.5"/>
+              <circle cx="26" cy="60" r="4.5" fill="#c8f090"/>
+              <circle cx="58" cy="60" r="10" fill="#2d6010" stroke="white" stroke-width="2.5"/>
+              <circle cx="58" cy="60" r="4.5" fill="#c8f090"/>
+            </svg>
+          </div>
+          <span class="pin-label">Iași</span>
+          <div class="pin-tooltip tooltip-left">
+            <div class="tt-status future-color">🟠 Stop viitor</div>
+            <div class="tt-city">Iași</div>
+            <div class="tt-row">📅 <b>Data:</b> 29 Mai</div>
+            <div class="tt-row">🕙 <b>Ora:</b> 10:00–15:00</div>
+            <div class="tt-desc">Stop planificat în Iași. Bucuros să te vedem!</div>
+          </div>
+        </div>
+
+        <!-- BUCURESTI -->
+        <div class="city-pin future" style="left:57%;top:70%;">
+          <div class="caravan-wrap orange-tint">
+            <svg viewBox="0 0 110 72" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="16" width="78" height="38" rx="11" fill="#7ec850" stroke="#2d6010" stroke-width="3"/>
+              <rect x="7" y="10" width="72" height="8" rx="4" fill="#5aaa2a" stroke="#2d6010" stroke-width="2"/>
+              <rect x="13" y="24" width="29" height="20" rx="3" fill="#2d6010" stroke="#1a400a" stroke-width="2"/>
+              <polygon points="13,24 42,24 46,17 9,17" fill="#9ad050" stroke="#2d6010" stroke-width="1.5"/>
+              <path d="M64,30 C64,25 57,23 57,30 C57,23 50,25 50,30 C50,37 57,43 57,43 C57,43 64,37 64,30Z" fill="white" stroke="#2d6010" stroke-width="1.5"/>
+              <line x1="54" y1="28" x2="54" y2="41" stroke="#2d6010" stroke-width="1.5"/>
+              <line x1="60" y1="28" x2="60" y2="41" stroke="#2d6010" stroke-width="1.5"/>
+              <rect x="4" y="46" width="78" height="8" fill="white"/>
+              <rect x="80" y="30" width="22" height="3" rx="1" fill="#2d6010"/>
+              <rect x="80" y="25" width="3" height="13" rx="1" fill="#2d6010"/>
+              <circle cx="103" cy="32" r="4" fill="#2d6010" stroke="white" stroke-width="1.5"/>
+              <circle cx="26" cy="60" r="10" fill="#2d6010" stroke="white" stroke-width="2.5"/>
+              <circle cx="26" cy="60" r="4.5" fill="#c8f090"/>
+              <circle cx="58" cy="60" r="10" fill="#2d6010" stroke="white" stroke-width="2.5"/>
+              <circle cx="58" cy="60" r="4.5" fill="#c8f090"/>
+            </svg>
+          </div>
+          <span class="pin-label">București</span>
+          <div class="pin-tooltip tooltip-up">
+            <div class="tt-status future-color">🟠 Stop viitor</div>
+            <div class="tt-city">București</div>
+            <div class="tt-row">📅 <b>Data:</b> 5 Iunie</div>
+            <div class="tt-row">🕙 <b>Ora:</b> 09:00–16:00</div>
+            <div class="tt-desc">Stop special în Capitală! Eveniment mare planificat.</div>
+          </div>
+        </div>
+
+      </div><!-- end harta-container -->
+
+      <!-- Timeline -->
+      <div class="timeline">
+        <div class="timeline-line"></div>
+        <div class="stop past"><div class="stop-dot"></div><span class="stop-name">TIMIȘOARA</span><span class="stop-status">(Trecut)</span></div>
+        <div class="stop current"><div class="stop-dot active"></div><span class="stop-name">SIBIU</span><span class="stop-status">(Prezent)</span></div>
+        <div class="stop future"><div class="stop-dot next"></div><span class="stop-name">CLUJ</span><span class="stop-status">(Viitor)</span></div>
+        <div class="stop future"><div class="stop-dot next"></div><span class="stop-name">IAȘI</span><span class="stop-status">(Viitor)</span></div>
+        <div class="stop future"><div class="stop-dot next"></div><span class="stop-name">BUCUREȘTI</span><span class="stop-status">(Viitor)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="regulament">
+    <h2>REGULAMENT DONARE</h2>
+    <div class="regulament-grid">
+      <div class="reg-col accepted">
+        <h3>ALIMENTE ACCEPTATE</h3>
+        <div class="food-icons">
+          <div class="food-item">🥕 Legume proaspete</div>
+          <div class="food-item">🥫 Conserve nedeschise</div>
+          <div class="food-item">🥛 Lactate în termen</div>
+          <div class="food-item">🍞 Produse de panificație</div>
+          <div class="food-item">🍎 Fructe proaspete</div>
+        </div>
+      </div>
+      <div class="reg-divider"></div>
+      <div class="reg-col rejected">
+        <h3>NEACCEPTATE</h3>
+        <div class="food-icons">
+          <div class="food-item rejected-item">❌ Alimente expirate</div>
+          <div class="food-item rejected-item">❌ Conserve deschise</div>
+          <div class="food-item rejected-item">❌ Produse deteriorate</div>
+          <div class="food-item rejected-item">❌ Băuturi alcoolice</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2026 Stop Risipa Alimentară | Împreună reducem risipa</p>
+  </footer>
+
+</body>
+</html>
