@@ -40,13 +40,13 @@
 
         <!-- Ruta punctata SVG overlay -->
         <svg class="route-overlay" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <polyline points="21,54 43,55 40,37 72,32 57,70"
+          <polyline points="14.8,53.6 15.6,46.1 37.1,35.3 42.4,52.7 75.1,28.4 60.9,77.0"
             fill="none" stroke="#e8801a" stroke-width="0.9"
             stroke-dasharray="2.5,1.8" opacity="0.9"/>
         </svg>
 
         <!-- TIMISOARA -->
-        <div class="city-pin past" style="left:21%;top:54%;">
+        <div class="city-pin past" style="left:14.8%;top:53.6%;">
           <div class="caravan-wrap grayscale">
             <svg viewBox="0 0 110 72" xmlns="http://www.w3.org/2000/svg">
               <rect x="4" y="16" width="78" height="38" rx="11" fill="#7ec850" stroke="#2d6010" stroke-width="3"/>
@@ -76,8 +76,39 @@
           </div>
         </div>
 
+        <!-- ARAD -->
+        <div class="city-pin past" style="left:15.6%;top:46.1%;">
+          <div class="caravan-wrap grayscale">
+            <svg viewBox="0 0 110 72" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="16" width="78" height="38" rx="11" fill="#7ec850" stroke="#2d6010" stroke-width="3"/>
+              <rect x="7" y="10" width="72" height="8" rx="4" fill="#5aaa2a" stroke="#2d6010" stroke-width="2"/>
+              <rect x="13" y="24" width="29" height="20" rx="3" fill="#2d6010" stroke="#1a400a" stroke-width="2"/>
+              <polygon points="13,24 42,24 46,17 9,17" fill="#9ad050" stroke="#2d6010" stroke-width="1.5"/>
+              <path d="M64,30 C64,25 57,23 57,30 C57,23 50,25 50,30 C50,37 57,43 57,43 C57,43 64,37 64,30Z" fill="white" stroke="#2d6010" stroke-width="1.5"/>
+              <line x1="54" y1="28" x2="54" y2="41" stroke="#2d6010" stroke-width="1.5"/>
+              <line x1="60" y1="28" x2="60" y2="41" stroke="#2d6010" stroke-width="1.5"/>
+              <rect x="4" y="46" width="78" height="8" fill="white"/>
+              <rect x="80" y="30" width="22" height="3" rx="1" fill="#2d6010"/>
+              <rect x="80" y="25" width="3" height="13" rx="1" fill="#2d6010"/>
+              <circle cx="103" cy="32" r="4" fill="#2d6010" stroke="white" stroke-width="1.5"/>
+              <circle cx="26" cy="60" r="10" fill="#2d6010" stroke="white" stroke-width="2.5"/>
+              <circle cx="26" cy="60" r="4.5" fill="#c8f090"/>
+              <circle cx="58" cy="60" r="10" fill="#2d6010" stroke="white" stroke-width="2.5"/>
+              <circle cx="58" cy="60" r="4.5" fill="#c8f090"/>
+            </svg>
+          </div>
+          <span class="pin-label">Arad</span>
+          <div class="pin-tooltip">
+            <div class="tt-status past-color">✅ Stop finalizat</div>
+            <div class="tt-city">Arad</div>
+            <div class="tt-row">📅 <b>Data:</b> 6-10 Mai</div>
+            <div class="tt-row">🕙 <b>Ora:</b> 10:00–14:00</div>
+            <div class="tt-desc">Stop finalizat! 280 kg alimente donate.</div>
+          </div>
+        </div>
+
         <!-- SIBIU LIVE -->
-        <div class="city-pin current live-pin" style="left:43%;top:55%;">
+        <div class="city-pin current live-pin" style="left:42.4%;top:52.7%;">
           <div class="live-badge">● LIVE</div>
           <div class="caravan-wrap">
             <svg viewBox="0 0 110 72" xmlns="http://www.w3.org/2000/svg">
@@ -109,7 +140,7 @@
         </div>
 
         <!-- CLUJ -->
-        <div class="city-pin future" style="left:40%;top:37%;">
+        <div class="city-pin future" style="left:37.1%;top:35.3%;">
           <div class="caravan-wrap orange-tint">
             <svg viewBox="0 0 110 72" xmlns="http://www.w3.org/2000/svg">
               <rect x="4" y="16" width="78" height="38" rx="11" fill="#7ec850" stroke="#2d6010" stroke-width="3"/>
@@ -140,7 +171,7 @@
         </div>
 
         <!-- IASI -->
-        <div class="city-pin future" style="left:72%;top:32%;">
+        <div class="city-pin future" style="left:75.1%;top:28.4%;">
           <div class="caravan-wrap orange-tint">
             <svg viewBox="0 0 110 72" xmlns="http://www.w3.org/2000/svg">
               <rect x="4" y="16" width="78" height="38" rx="11" fill="#7ec850" stroke="#2d6010" stroke-width="3"/>
@@ -171,7 +202,7 @@
         </div>
 
         <!-- BUCURESTI -->
-        <div class="city-pin future" style="left:57%;top:70%;">
+        <div class="city-pin future" style="left:60.9%;top:77.0%;">
           <div class="caravan-wrap orange-tint">
             <svg viewBox="0 0 110 72" xmlns="http://www.w3.org/2000/svg">
               <rect x="4" y="16" width="78" height="38" rx="11" fill="#7ec850" stroke="#2d6010" stroke-width="3"/>
@@ -206,6 +237,7 @@
       <div class="timeline">
         <div class="timeline-line"></div>
         <div class="stop past"><div class="stop-dot"></div><span class="stop-name">TIMIȘOARA</span><span class="stop-status">(Trecut)</span></div>
+        <div class="stop past"><div class="stop-dot"></div><span class="stop-name">ARAD</span><span class="stop-status">(Trecut)</span></div>
         <div class="stop current"><div class="stop-dot active"></div><span class="stop-name">SIBIU</span><span class="stop-status">(Prezent)</span></div>
         <div class="stop future"><div class="stop-dot next"></div><span class="stop-name">CLUJ</span><span class="stop-status">(Viitor)</span></div>
         <div class="stop future"><div class="stop-dot next"></div><span class="stop-name">IAȘI</span><span class="stop-status">(Viitor)</span></div>
