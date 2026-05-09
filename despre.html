@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Despre Risipă - Stop Risipa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #f4f9f4; color: #1a1a1a; }
+    .navbar { width:100%; background:#fff; border-bottom:2px solid #d4edda; padding:0 40px; display:flex; align-items:center; justify-content:space-between; height:64px; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+    .logo { font-size:1.4rem; font-weight:800; color:#2d6a2d; text-decoration:none; }
+    .nav-links { list-style:none; display:flex; gap:28px; margin:0; padding:0; }
+    .nav-links a { text-decoration:none; color:#444; font-size:0.95rem; font-weight:500; }
+    .nav-links a:hover, .nav-links a.active { color:#2d6a2d; }
+    .btn-donate { background:#2d6a2d; color:#fff; padding:10px 22px; border-radius:25px; text-decoration:none; font-weight:700; font-size:0.9rem; }
+    .page-hero { background:linear-gradient(135deg,#1a4a1a,#2d8a2d); color:#fff; padding:80px 40px; text-align:center; }
+    .page-hero h1 { font-size:2.5rem; font-weight:900; margin:0 0 16px; }
+    .page-hero p { font-size:1.1rem; opacity:0.9; max-width:600px; margin:0 auto; }
+    .content-section { max-width:900px; margin:60px auto; padding:0 40px; }
+    .content-section h2 { color:#2d6a2d; font-size:1.8rem; margin-bottom:16px; }
+    .content-section p { line-height:1.8; color:#444; margin-bottom:20px; }
+    .facts-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; margin:40px 0; }
+    .fact-card { background:#fff; border-radius:12px; padding:24px; border:1px solid #e0f0e0; text-align:center; }
+    .fact-number { font-size:2rem; font-weight:900; color:#2d6a2d; }
+    .fact-label { color:#555; font-size:0.9rem; margin-top:8px; }
+    .footer { background:#1a4a1a; color:rgba(255,255,255,0.8); text-align:center; padding:28px 40px; font-size:0.9rem; }
+    .footer a { color:inherit; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="acasa.html" class="logo">⚡ STOP RISIPA</a>
+    <ul class="nav-links">
+      <li><a href="acasa.html">ACASĂ</a></li>
+      <li><a href="index.html">CARAVANA</a></li>
+      <li><a href="despre.html" class="active">DESPRE RISIPĂ</a></li>
+      <li><a href="sfaturi.html">SFATURI &amp; REȚETE</a></li>
+      <li><a href="implica-te.html">IMPLICĂ-TE</a></li>
+      <li><a href="contact.html">CONTACT</a></li>
+    </ul>
+    <a href="contact.html" class="btn-donate">DONEAZĂ ACUM</a>
+  </nav>
+
+  <section class="page-hero">
+    <h1>🌍 Despre Risipa Alimentară</h1>
+    <p>Înțelege problema pentru a face parte din soluție.</p>
+  </section>
+
+  <div class="content-section">
+    <h2>Ce este risipa alimentară?</h2>
+    <p>Risipa alimentară reprezintă orice aliment care este aruncat, pierdut sau degradat de-a lungul lanțului alimentar — de la producție până la consumul final. În România, aproximativ <strong>2.5 milioane de tone</strong> de alimente sunt risipite anual.</p>
+    <p>Această risipă are un impact enorm: economic, social și de mediu. Alimentele produse dar neconsumate au folosit apă, energie, pământ și muncă — toate irosite fără rost.</p>
+
+    <div class="facts-grid">
+      <div class="fact-card"><div class="fact-number">2.5M</div><div class="fact-label">Tone risipite anual în România</div></div>
+      <div class="fact-card"><div class="fact-number">130kg</div><div class="fact-label">Per persoană pe an</div></div>
+      <div class="fact-card"><div class="fact-number">35%</div><div class="fact-label">Din gospodării</div></div>
+      <div class="fact-card"><div class="fact-number">4.2B€</div><div class="fact-label">Valoare economică pierdută</div></div>
+    </div>
+
+    <h2>De ce contează?</h2>
+    <p>Când arunci mâncare, arunci și resursele folosite pentru a o produce. 1 kg de carne de vită necesită aproximativ 15.000 litri de apă. Risipa alimentară contribuie cu <strong>8-10%</strong> din emisiile globale de gaze cu efect de seră.</p>
+    <p>În același timp, în România există milioane de persoane care nu au acces la hrană suficientă. Reducerea risipei și redistribuirea alimentelor este o soluție concretă la ambele probleme.</p>
+
+    <h2>Ce putem face?</h2>
+    <p>Planifică mesele săptămânale, cumpără doar ce ai nevoie, depozitează corect alimentele și donează surplusul. Fiecare gest mic contează. Caravana noastră colectează alimente nedeschise și redistribuie comunităților vulnerabile din toată România.</p>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 Stop Risipa Alimentară · <a href="acasa.html">Acasă</a> · <a href="contact.html">Contact</a></p>
+  </footer>
+</body>
+</html>

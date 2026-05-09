@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sfaturi & Rețete - Stop Risipa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #f4f9f4; color: #1a1a1a; }
+    .navbar { width:100%; background:#fff; border-bottom:2px solid #d4edda; padding:0 40px; display:flex; align-items:center; justify-content:space-between; height:64px; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+    .logo { font-size:1.4rem; font-weight:800; color:#2d6a2d; text-decoration:none; }
+    .nav-links { list-style:none; display:flex; gap:28px; margin:0; padding:0; }
+    .nav-links a { text-decoration:none; color:#444; font-size:0.95rem; font-weight:500; }
+    .nav-links a:hover, .nav-links a.active { color:#2d6a2d; }
+    .btn-donate { background:#2d6a2d; color:#fff; padding:10px 22px; border-radius:25px; text-decoration:none; font-weight:700; font-size:0.9rem; }
+    .page-hero { background:linear-gradient(135deg,#1a4a1a,#2d8a2d); color:#fff; padding:80px 40px; text-align:center; }
+    .page-hero h1 { font-size:2.5rem; font-weight:900; margin:0 0 16px; }
+    .page-hero p { font-size:1.1rem; opacity:0.9; max-width:600px; margin:0 auto; }
+    .tips-section { max-width:1000px; margin:60px auto; padding:0 40px; }
+    .tips-section h2 { color:#2d6a2d; font-size:1.8rem; margin-bottom:32px; }
+    .tips-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; margin-bottom:60px; }
+    .tip-card { background:#fff; border-radius:16px; padding:28px; border:1px solid #e0f0e0; box-shadow:0 2px 8px rgba(0,0,0,0.05); }
+    .tip-icon { font-size:2.5rem; margin-bottom:12px; }
+    .tip-card h3 { color:#2d6a2d; margin:0 0 8px; }
+    .tip-card p { color:#555; line-height:1.6; font-size:0.95rem; margin:0; }
+    .recipe-card { background:#fff; border-radius:16px; padding:28px; border:1px solid #e0f0e0; margin-bottom:24px; }
+    .recipe-card h3 { color:#2d6a2d; margin:0 0 12px; }
+    .recipe-card ul { padding-left:20px; color:#555; line-height:2; }
+    .footer { background:#1a4a1a; color:rgba(255,255,255,0.8); text-align:center; padding:28px 40px; font-size:0.9rem; }
+    .footer a { color:inherit; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="acasa.html" class="logo">⚡ STOP RISIPA</a>
+    <ul class="nav-links">
+      <li><a href="acasa.html">ACASĂ</a></li>
+      <li><a href="index.html">CARAVANA</a></li>
+      <li><a href="despre.html">DESPRE RISIPĂ</a></li>
+      <li><a href="sfaturi.html" class="active">SFATURI &amp; REȚETE</a></li>
+      <li><a href="implica-te.html">IMPLICĂ-TE</a></li>
+      <li><a href="contact.html">CONTACT</a></li>
+    </ul>
+    <a href="contact.html" class="btn-donate">DONEAZĂ ACUM</a>
+  </nav>
+
+  <section class="page-hero">
+    <h1>💡 Sfaturi &amp; Rețete</h1>
+    <p>Idei practice pentru a risipi mai puțin și a găti mai inteligent.</p>
+  </section>
+
+  <div class="tips-section">
+    <h2>Sfaturi pentru a reduce risipa</h2>
+    <div class="tips-grid">
+      <div class="tip-card"><div class="tip-icon">📋</div><h3>Planifică mesele</h3><p>Fă o listă înainte de cumpărături și planifică mesele pentru toată săptămâna. Cumperi exact ce ai nevoie.</p></div>
+      <div class="tip-card"><div class="tip-icon">🧊</div><h3>Depozitare corectă</h3><p>Pune fructele și legumele în locurile potrivite din frigider. Unele se păstrează mai bine la temperatura camerei.</p></div>
+      <div class="tip-card"><div class="tip-icon">🔄</div><h3>FIFO – primul intrat, primul ieșit</h3><p>La fiecare cumpărătură, mută produsele vechi în față și pune cele noi în spate.</p></div>
+      <div class="tip-card"><div class="tip-icon">❄️</div><h3>Congelează surplusul</h3><p>Pâinea, carnea, legumele și fructele coapte se pot congela ușor pentru a le folosi mai târziu.</p></div>
+      <div class="tip-card"><div class="tip-icon">🍲</div><h3>Gătește creativ</h3><p>Resturile de ieri pot deveni supa sau salata de azi. Fii creativ cu ce ai în frigider!</p></div>
+      <div class="tip-card"><div class="tip-icon">🎁</div><h3>Donează surplusul</h3><p>Ai prea mult? Donează vecinilor, prietenilor sau caravanei noastre. Niciun aliment bun nu trebuie aruncat.</p></div>
+    </div>
+
+    <h2>Rețete anti-risipă</h2>
+    <div class="recipe-card">
+      <h3>🍞 Pâine prăjită cu legume rămase</h3>
+      <ul><li>Pâine de ieri (câteva felii)</li><li>Legume rămase din frigider (ardei, roșii, ceapă)</li><li>Brânză rasă, sare, piper, ulei de măsline</li><li>Se pun legumele pe pâine, se adaugă brânza și se bagă la cuptor 10 min la 200°C.</li></ul>
+    </div>
+    <div class="recipe-card">
+      <h3>🥣 Supă din coji de legume</h3>
+      <ul><li>Coji de morcovi, cartofi, țelină, praz</li><li>Apă, sare, piper, foi de dafin</li><li>Se fierb cojile 30 minute, se strecoară. Rezultă o supă clară, gustoasă și zero risipă.</li></ul>
+    </div>
+    <div class="recipe-card">
+      <h3>🍌 Banana bread din banane coapte</h3>
+      <ul><li>3 banane foarte coapte (înnegrite)</li><li>2 ouă, 150g făină, 80g zahăr, 50ml ulei, 1 plic praf de copt</li><li>Se amestecă totul, se toarnă în tavă și se coace 45 min la 175°C.</li></ul>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 Stop Risipa Alimentară · <a href="acasa.html">Acasă</a> · <a href="contact.html">Contact</a></p>
+  </footer>
+</body>
+</html>

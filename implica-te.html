@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Implică-te - Stop Risipa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #f4f9f4; color: #1a1a1a; }
+    .navbar { width:100%; background:#fff; border-bottom:2px solid #d4edda; padding:0 40px; display:flex; align-items:center; justify-content:space-between; height:64px; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+    .logo { font-size:1.4rem; font-weight:800; color:#2d6a2d; text-decoration:none; }
+    .nav-links { list-style:none; display:flex; gap:28px; margin:0; padding:0; }
+    .nav-links a { text-decoration:none; color:#444; font-size:0.95rem; font-weight:500; }
+    .nav-links a:hover, .nav-links a.active { color:#2d6a2d; }
+    .btn-donate { background:#2d6a2d; color:#fff; padding:10px 22px; border-radius:25px; text-decoration:none; font-weight:700; font-size:0.9rem; }
+    .page-hero { background:linear-gradient(135deg,#1a4a1a,#2d8a2d); color:#fff; padding:80px 40px; text-align:center; }
+    .page-hero h1 { font-size:2.5rem; font-weight:900; margin:0 0 16px; }
+    .page-hero p { font-size:1.1rem; opacity:0.9; max-width:600px; margin:0 auto; }
+    .ways-section { max-width:1000px; margin:60px auto; padding:0 40px; }
+    .ways-section h2 { color:#2d6a2d; font-size:1.8rem; margin-bottom:32px; }
+    .ways-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; }
+    .way-card { background:#fff; border-radius:16px; padding:32px; border:1px solid #e0f0e0; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.05); }
+    .way-icon { font-size:3rem; margin-bottom:16px; }
+    .way-card h3 { color:#2d6a2d; margin:0 0 12px; font-size:1.2rem; }
+    .way-card p { color:#555; line-height:1.6; font-size:0.95rem; margin:0 0 20px; }
+    .way-btn { display:inline-block; background:#2d6a2d; color:#fff; padding:10px 24px; border-radius:20px; text-decoration:none; font-weight:600; font-size:0.9rem; }
+    .way-btn:hover { background:#1e4d1e; }
+    .footer { background:#1a4a1a; color:rgba(255,255,255,0.8); text-align:center; padding:28px 40px; font-size:0.9rem; margin-top:60px; }
+    .footer a { color:inherit; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="acasa.html" class="logo">⚡ STOP RISIPA</a>
+    <ul class="nav-links">
+      <li><a href="acasa.html">ACASĂ</a></li>
+      <li><a href="index.html">CARAVANA</a></li>
+      <li><a href="despre.html">DESPRE RISIPĂ</a></li>
+      <li><a href="sfaturi.html">SFATURI &amp; REȚETE</a></li>
+      <li><a href="implica-te.html" class="active">IMPLICĂ-TE</a></li>
+      <li><a href="contact.html">CONTACT</a></li>
+    </ul>
+    <a href="contact.html" class="btn-donate">DONEAZĂ ACUM</a>
+  </nav>
+
+  <section class="page-hero">
+    <h1>🤝 Implică-te</h1>
+    <p>Fiecare persoană contează. Alătură-te misiunii noastre!</p>
+  </section>
+
+  <div class="ways-section">
+    <h2>Cum poți face diferența?</h2>
+    <div class="ways-grid">
+      <div class="way-card">
+        <div class="way-icon">🚐</div>
+        <h3>Donează Alimente</h3>
+        <p>Adu alimente nedeschise și în termen la caravana noastră. Verifică harta pentru cel mai apropiat stop.</p>
+        <a href="index.html" class="way-btn">Vezi Harta</a>
+      </div>
+      <div class="way-card">
+        <div class="way-icon">🙋</div>
+        <h3>Voluntariat</h3>
+        <p>Ajută-ne la organizarea stopurilor din caravană. Avem nevoie de voluntari în fiecare oraș.</p>
+        <a href="contact.html" class="way-btn">Contactează-ne</a>
+      </div>
+      <div class="way-card">
+        <div class="way-icon">📢</div>
+        <h3>Răspândește Vestea</h3>
+        <p>Distribuie misiunea noastră pe rețelele sociale. Cu cât mai mulți oameni știu, cu atât mai mult impact avem.</p>
+        <a href="contact.html" class="way-btn">Află Mai Mult</a>
+      </div>
+      <div class="way-card">
+        <div class="way-icon">🏢</div>
+        <h3>Parteneriat Corporativ</h3>
+        <p>Ești o companie sau restaurant? Hai să colaborăm pentru a reduce risipa la scară mai mare.</p>
+        <a href="contact.html" class="way-btn">Parteneriat</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 Stop Risipa Alimentară · <a href="acasa.html">Acasă</a> · <a href="contact.html">Contact</a></p>
+  </footer>
+</body>
+</html>
