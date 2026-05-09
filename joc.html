@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joc Fermier - Stop Risipa</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin:0; padding:0; font-family:'Segoe UI',Arial,sans-serif; background:#1a1a2e; color:#fff; overflow-x:hidden; }
+
+    .navbar { width:100%; background:#fff; border-bottom:2px solid #d4edda; padding:0 40px; display:flex; align-items:center; justify-content:space-between; height:64px; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+    .logo { font-size:1.4rem; font-weight:800; color:#2d6a2d; text-decoration:none; }
+    .nav-links { list-style:none; display:flex; gap:28px; margin:0; padding:0; }
+    .nav-links a { text-decoration:none; color:#444; font-size:0.95rem; font-weight:500; transition:color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color:#2d6a2d; }
+    .btn-donate { background:#2d6a2d; color:#fff; padding:10px 22px; border-radius:25px; text-decoration:none; font-weight:700; font-size:0.9rem; }
+
+    /* GAME WRAPPER */
+    .game-header { text-align:center; padding:32px 20px 12px; }
+    .game-header h1 { font-size:2rem; font-weight:900; color:#7ec850; margin:0 0 6px; }
+    .game-header p { color:#aaa; font-size:0.95rem; margin:0; }
+
+    .hud { display:flex; justify-content:center; gap:40px; padding:16px; font-size:1.1rem; font-weight:700; }
+    .hud-item { background:rgba(255,255,255,0.08); padding:10px 24px; border-radius:12px; text-align:center; }
+    .hud-label { font-size:0.7rem; color:#aaa; text-transform:uppercase; letter-spacing:1px; }
+    .hud-val { font-size:1.6rem; color:#7ec850; }
+    .hud-val.red { color:#ff4444; }
+
+    #gameCanvas {
+      display:block;
+      margin:0 auto;
+      border-radius:16px;
+      border:3px solid #2d6a2d;
+      box-shadow:0 0 40px rgba(126,200,80,0.2);
+      cursor:none;
+    }
+
+    .game-controls { text-align:center; padding:12px; color:#888; font-size:0.85rem; }
+
+    /* OVERLAY */
+    #overlay {
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.85);
+      display:flex; align-items:center; justify-content:center;
+      z-index:200;
+    }
+    .overlay-box {
+      background:linear-gradient(135deg,#1a4a1a,#2d6a2d);
+      border-radius:24px;
+      padding:48px 56px;
+      text-align:center;
+      max-width:420px;
+      box-shadow:0 8px 40px rgba(0,0,0,0.5);
+      border:2px solid rgba(126,200,80,0.4);
+    }
+    .overlay-box .emoji { font-size:4rem; margin-bottom:16px; }
+    .overlay-box h2 { font-size:2rem; font-weight:900; margin:0 0 12px; color:#fff; }
+    .overlay-box p { color:rgba(255,255,255,0.8); margin:0 0 28px; line-height:1.6; }
+    .btn-start {
+      background:#7ec850; color:#1a1a1a;
+      border:none; padding:16px 40px;
+      border-radius:30px; font-size:1.1rem;
+      font-weight:800; cursor:pointer;
+      transition:all 0.2s;
+      box-shadow:0 4px 16px rgba(126,200,80,0.4);
+    }
+    .btn-start:hover { background:#9ad862; transform:translateY(-2px); }
+
+    .footer { background:#1a4a1a; color:rgba(255,255,255,0.6); text-align:center; padding:20px; font-size:0.85rem; margin-top:24px; }
+    .footer a { color:inherit; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="acasa.html" class="logo">⚡ STOP RISIPA</a>
+    <ul class="nav-links">
+      <li><a href="acasa.html">ACASĂ</a></li>
+      <li><a href="index.html">CARAVANA</a></li>
+      <li><a href="despre.html">DESPRE RISIPĂ</a></li>
+      <li><a href="sfaturi.html">SFATURI &amp; REȚETE</a></li>
+      <li><a href="implica-te.html">IMPLICĂ-TE</a></li>
+      <li><a href="contact.html">CONTACT</a></li>
+    </ul>
+    <a href="contact.html" class="btn-donate">DONEAZĂ ACUM</a>
+  </nav>
+
+  <div class="game-header">
+    <h1>👨‍🌾 Fermierul Anti-Risipă</h1>
+    <p>Prinde legumele și fructele! Evită fast food-ul!</p>
+  </div>
+
+  <div class="hud">
+    <div class="hud-item">
+      <div class="hud-label">Puncte</div>
+      <div class="hud-val" id="scoreVal">0</div>
+    </div>
+    <div class="hud-item">
+      <div class="hud-label">Vieți</div>
+      <div class="hud-val red" id="livesVal">❤️❤️❤️</div>
+    </div>
+    <div class="hud-item">
+      <div class="hud-label">Nivel</div>
+      <div class="hud-val" id="levelVal">1</div>
+    </div>
+  </div>
+
+  <canvas id="gameCanvas"></canvas>
+  <div class="game-controls">👈👉 Mișcă mouse-ul sau săgețile &larr; &rarr; pentru a controla fermierul</div>
+
+  <!-- START OVERLAY -->
+  <div id="overlay">
+    <div class="overlay-box" id="overlayBox">
+      <div class="emoji">👨‍🌾</div>
+      <h2>Fermierul<br>Anti-Risipă</h2>
+      <p>Prinde 🥕 🍅 🍎 🌽 🥦 pentru puncte!<br>Evită 🍔 🍕 🍟 pentru a nu pierde vieți!<br><br>3 vieți — Mult succes!</p>
+      <button class="btn-start" onclick="startGame()">JOACĂ ACUM 🚀</button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 Stop Risipa Alimentară · <a href="acasa.html">Acasă</a> · <a href="index.html">Caravana</a></p>
+  </footer>
+
+<script>
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+// Responsive canvas
+function resizeCanvas() {
+  const maxW = Math.min(window.innerWidth - 32, 800);
+  canvas.width = maxW;
+  canvas.height = Math.round(maxW * 0.65);
+}
+resizeCanvas();
+window.addEventListener('resize', () => { resizeCanvas(); });
+
+// Game state
+let score = 0, lives = 3, level = 1, gameRunning = false;
+let items = [], particles = [];
+let frameCount = 0, spawnRate = 90, fallSpeed = 2.2;
+let farmer = { x: canvas.width / 2, w: 80, h: 60 };
+
+// Input
+let mouseX = canvas.width / 2;
+canvas.addEventListener('mousemove', e => {
+  const rect = canvas.getBoundingClientRect();
+  mouseX = e.clientX - rect.left;
+});
+const keys = {};
+window.addEventListener('keydown', e => keys[e.key] = true);
+window.addEventListener('keyup', e => keys[e.key] = false);
+
+// Touch
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  const rect = canvas.getBoundingClientRect();
+  mouseX = e.touches[0].clientX - rect.left;
+}, { passive: false });
+
+// Items config
+const GOOD = [
+  { emoji: '🥕', label: 'Morcov',  pts: 10 },
+  { emoji: '🍅', label: 'Roșie',   pts: 10 },
+  { emoji: '🍎', label: 'Măr',    pts: 15 },
+  { emoji: '🌽', label: 'Porumb', pts: 10 },
+  { emoji: '🥦', label: 'Broccoli',pts: 20 },
+  { emoji: '🍌', label: 'Banană', pts: 10 },
+  { emoji: '🍓', label: 'Căpșună',pts: 15 },
+  { emoji: '🥑', label: 'Avocado', pts: 25 },
+];
+const BAD = [
+  { emoji: '🍔', label: 'Burger',  dmg: 1 },
+  { emoji: '🍕', label: 'Pizza',   dmg: 1 },
+  { emoji: '🍟', label: 'Cartofi', dmg: 1 },
+  { emoji: '🍩', label: 'Gogoasa',dmg: 1 },
+  { emoji: '🥤', label: 'Suc',     dmg: 1 },
+];
+
+function spawnItem() {
+  const isGood = Math.random() < 0.65;
+  const pool = isGood ? GOOD : BAD;
+  const cfg = pool[Math.floor(Math.random() * pool.length)];
+  items.push({
+    x: 30 + Math.random() * (canvas.width - 60),
+    y: -40,
+    size: 36 + Math.random() * 10,
+    speed: fallSpeed + Math.random() * 1.5,
+    rotation: Math.random() * Math.PI * 2,
+    rotSpeed: (Math.random() - 0.5) * 0.08,
+    ...cfg,
+    good: isGood
+  });
+}
+
+function spawnParticles(x, y, color, count = 8) {
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x, y,
+      vx: (Math.random() - 0.5) * 6,
+      vy: -Math.random() * 5 - 2,
+      life: 1, decay: 0.04 + Math.random() * 0.03,
+      size: 4 + Math.random() * 6,
+      color
+    });
+  }
+}
+
+function drawFarmer(x, y, w, h) {
+  const cx = x;
+  // Body (overalls)
+  ctx.fillStyle = '#4a90d9';
+  ctx.beginPath();
+  ctx.roundRect(cx - w/2 + 8, y - h + 24, w - 16, h - 20, 6);
+  ctx.fill();
+  // Head
+  ctx.fillStyle = '#f4c57a';
+  ctx.beginPath();
+  ctx.arc(cx, y - h + 14, 16, 0, Math.PI * 2);
+  ctx.fill();
+  // Hat
+  ctx.fillStyle = '#8B4513';
+  ctx.fillRect(cx - 20, y - h + 1, 40, 6);
+  ctx.beginPath();
+  ctx.roundRect(cx - 13, y - h - 14, 26, 18, 4);
+  ctx.fill();
+  // Eyes
+  ctx.fillStyle = '#333';
+  ctx.beginPath(); ctx.arc(cx - 6, y - h + 13, 2.5, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx + 6, y - h + 13, 2.5, 0, Math.PI*2); ctx.fill();
+  // Smile
+  ctx.strokeStyle = '#333'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.arc(cx, y - h + 17, 5, 0.2, Math.PI - 0.2); ctx.stroke();
+  // Arms / basket
+  ctx.fillStyle = '#e8a840';
+  ctx.beginPath();
+  ctx.roundRect(cx - w/2, y - 20, w, 14, 5);
+  ctx.fill();
+  ctx.strokeStyle = '#c47820'; ctx.lineWidth = 2;
+  ctx.strokeRect(cx - w/2, y - 20, w, 14);
+  // Basket lines
+  ctx.strokeStyle = '#c47820'; ctx.lineWidth = 1;
+  for (let i = 1; i < 4; i++) {
+    ctx.beginPath();
+    ctx.moveTo(cx - w/2 + (w/4)*i, y - 20);
+    ctx.lineTo(cx - w/2 + (w/4)*i, y - 6);
+    ctx.stroke();
+  }
+  // Legs
+  ctx.fillStyle = '#2c5fa8';
+  ctx.fillRect(cx - 18, y - 16, 14, 18);
+  ctx.fillRect(cx + 4, y - 16, 14, 18);
+  // Shoes
+  ctx.fillStyle = '#5a3010';
+  ctx.beginPath(); ctx.roundRect(cx - 20, y - 2, 18, 8, 4); ctx.fill();
+  ctx.beginPath(); ctx.roundRect(cx + 2, y - 2, 18, 8, 4); ctx.fill();
+}
+
+function drawBackground() {
+  // Sky gradient
+  const sky = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.7);
+  sky.addColorStop(0, '#87CEEB');
+  sky.addColorStop(1, '#c8eaff');
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, canvas.width, canvas.height * 0.75);
+  // Ground
+  const ground = ctx.createLinearGradient(0, canvas.height * 0.75, 0, canvas.height);
+  ground.addColorStop(0, '#4a8c1c');
+  ground.addColorStop(1, '#2d5a0e');
+  ctx.fillStyle = ground;
+  ctx.fillRect(0, canvas.height * 0.75, canvas.width, canvas.height * 0.25);
+  // Ground line
+  ctx.fillStyle = '#5aaa2a';
+  ctx.fillRect(0, canvas.height * 0.75, canvas.width, 6);
+  // Clouds
+  drawCloud(canvas.width * 0.15, canvas.height * 0.1, 60);
+  drawCloud(canvas.width * 0.6, canvas.height * 0.07, 80);
+  drawCloud(canvas.width * 0.85, canvas.height * 0.13, 50);
+  // Sun
+  ctx.fillStyle = '#FFD700';
+  ctx.beginPath(); ctx.arc(canvas.width - 60, 50, 30, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#FFF9';
+  ctx.beginPath(); ctx.arc(canvas.width - 65, 44, 10, 0, Math.PI*2); ctx.fill();
+}
+
+function drawCloud(x, y, size) {
+  ctx.fillStyle = 'rgba(255,255,255,0.9)';
+  ctx.beginPath(); ctx.arc(x, y, size*0.5, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(x + size*0.4, y + size*0.1, size*0.38, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(x - size*0.35, y + size*0.15, size*0.32, 0, Math.PI*2); ctx.fill();
+}
+
+function updateHUD() {
+  document.getElementById('scoreVal').textContent = score;
+  const hearts = '❤️'.repeat(Math.max(0, lives)) + '🪶'.repeat(Math.max(0, 3 - lives));
+  document.getElementById('livesVal').textContent = hearts || '💨';
+  document.getElementById('levelVal').textContent = level;
+}
+
+function levelUp() {
+  level++;
+  fallSpeed = Math.min(2.2 + level * 0.4, 7);
+  spawnRate = Math.max(30, 90 - level * 8);
+  // Level up flash
+  particles.push({ x: canvas.width/2, y: canvas.height/2, vx:0, vy:0,
+    life:1, decay:0.015, size:canvas.width, color:'rgba(126,200,80,0.15)', isFlash:true });
+}
+
+function gameOver() {
+  gameRunning = false;
+  const box = document.getElementById('overlayBox');
+  box.innerHTML = `
+    <div class="emoji">${score > 100 ? '🏆' : '😢'}</div>
+    <h2>${score > 100 ? 'Super Fermier!' : 'Game Over!'}</h2>
+    <p>Ai obținut <strong style="color:#7ec850;font-size:1.4rem">${score} puncte</strong><br>la nivelul ${level}!<br><br>
+    ${score > 200 ? 'Fenomenal! Ești campionul anti-risipă! 🌟' : score > 100 ? 'Bravo! Continuă să lupteți contra risipei!' : 'Mai încearcați! Legumele au nevoie de tine!'}</p>
+    <button class="btn-start" onclick="startGame()">JOC NOU 🔄</button>
+  `;
+  document.getElementById('overlay').style.display = 'flex';
+}
+
+function startGame() {
+  score = 0; lives = 3; level = 1;
+  fallSpeed = 2.2; spawnRate = 90;
+  items = []; particles = []; frameCount = 0;
+  farmer.x = canvas.width / 2;
+  document.getElementById('overlay').style.display = 'none';
+  gameRunning = true;
+  updateHUD();
+  loop();
+}
+
+function loop() {
+  if (!gameRunning) return;
+  frameCount++;
+
+  // Move farmer
+  if (keys['ArrowLeft']) mouseX = Math.max(farmer.w/2, mouseX - 7);
+  if (keys['ArrowRight']) mouseX = Math.min(canvas.width - farmer.w/2, mouseX + 7);
+  farmer.x += (mouseX - farmer.x) * 0.18;
+  farmer.x = Math.max(farmer.w/2, Math.min(canvas.width - farmer.w/2, farmer.x));
+
+  // Spawn
+  if (frameCount % spawnRate === 0) spawnItem();
+
+  // Level up every 5 items caught (score based)
+  const newLevel = Math.floor(score / 80) + 1;
+  if (newLevel > level) levelUp();
+
+  // Draw
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawBackground();
+
+  const farmerY = canvas.height * 0.78;
+  const catchTop = farmerY - farmer.h + 18; // basket top
+
+  // Items
+  for (let i = items.length - 1; i >= 0; i--) {
+    const it = items[i];
+    it.y += it.speed;
+    it.rotation += it.rotSpeed;
+
+    // Draw emoji
+    ctx.save();
+    ctx.translate(it.x, it.y);
+    ctx.rotate(it.rotation);
+    ctx.font = `${it.size}px serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(it.emoji, 0, 0);
+    ctx.restore();
+
+    // Catch detection (basket area)
+    const inX = Math.abs(it.x - farmer.x) < farmer.w / 2 + 10;
+    const inY = it.y > catchTop - 10 && it.y < catchTop + 24;
+    if (inX && inY) {
+      if (it.good) {
+        score += it.pts;
+        spawnParticles(it.x, it.y, '#7ec850', 10);
+        // Floating text
+        particles.push({ x: it.x, y: it.y, vx:0, vy:-1.5,
+          life:1, decay:0.025, size:18, color:'#7ec850',
+          text: '+' + it.pts, isText:true });
+      } else {
+        lives--;
+        spawnParticles(it.x, it.y, '#ff4444', 12);
+        particles.push({ x: it.x, y: it.y, vx:0, vy:-1.5,
+          life:1, decay:0.025, size:18, color:'#ff4444',
+          text: '-1 ❤️', isText:true });
+        if (lives <= 0) { updateHUD(); items.splice(i,1); gameOver(); return; }
+      }
+      items.splice(i, 1);
+      updateHUD();
+      continue;
+    }
+
+    // Missed (fell off)
+    if (it.y > canvas.height + 20) {
+      if (it.good) {
+        lives--;
+        spawnParticles(it.x, canvas.height - 20, '#ffaa00', 6);
+        if (lives <= 0) { updateHUD(); items.splice(i,1); gameOver(); return; }
+        updateHUD();
+      }
+      items.splice(i, 1);
+    }
+  }
+
+  // Particles
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const p = particles[i];
+    p.life -= p.decay;
+    p.x += p.vx; p.y += p.vy;
+    if (p.life <= 0) { particles.splice(i,1); continue; }
+    if (p.isFlash) {
+      ctx.fillStyle = p.color;
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+    } else if (p.isText) {
+      ctx.globalAlpha = p.life;
+      ctx.fillStyle = p.color;
+      ctx.font = `bold ${p.size}px sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.fillText(p.text, p.x, p.y);
+      ctx.globalAlpha = 1;
+    } else {
+      ctx.globalAlpha = p.life;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI*2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  // Draw farmer on top
+  drawFarmer(farmer.x, farmerY, farmer.w, farmer.h);
+
+  // Custom cursor dot
+  ctx.fillStyle = 'rgba(255,255,255,0.6)';
+  ctx.beginPath(); ctx.arc(mouseX, Math.min(mouseX, canvas.height - 10), 4, 0, Math.PI*2); ctx.fill();
+
+  requestAnimationFrame(loop);
+}
+</script>
+</body>
+</html>
