@@ -6,192 +6,55 @@
     <title>Contact - Stop Risipa</title>
     <style>
       *, *::before, *::after { box-sizing: border-box; }
-
-      html, body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Segoe UI', Arial, sans-serif;
-        background-color: #f4f9f4;
-        color: #1a1a1a;
-      }
-
-      .navbar {
-        width: 100%;
-        background-color: #ffffff;
-        border-bottom: 2px solid #d4edda;
-        padding: 0 40px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 64px;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      }
-
-      .logo {
-        font-size: 1.4rem;
-        font-weight: 800;
-        color: #2d6a2d;
-        letter-spacing: 1px;
-        text-decoration: none;
-      }
-
-      .nav-links {
-        list-style: none;
-        display: flex;
-        gap: 28px;
-        margin: 0;
-        padding: 0;
-      }
-
-      .nav-links a {
-        text-decoration: none;
-        color: #444;
-        font-size: 0.95rem;
-        font-weight: 500;
-        transition: color 0.2s;
-      }
-
-      .nav-links a:hover,
-      .nav-links a.active { color: #2d6a2d; }
-
-      .btn-donate {
-        background: #2d6a2d;
-        color: #fff;
-        padding: 10px 22px;
-        border-radius: 25px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 0.9rem;
-      }
-
-      .contact-section {
-        max-width: 680px;
-        margin: 60px auto;
-        background: #fff;
-        border-radius: 20px;
-        padding: 48px 40px;
-        box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-        border: 1px solid #e0f0e0;
-      }
-
-      .contact-section h1 {
-        font-size: 2rem;
-        color: #2d6a2d;
-        margin-bottom: 8px;
-      }
-
-      .contact-section p {
-        color: #666;
-        margin-bottom: 32px;
-      }
-
-      .form-group {
-        margin-bottom: 20px;
-      }
-
-      .form-group label {
-        display: block;
-        font-weight: 600;
-        color: #333;
-        margin-bottom: 6px;
-        font-size: 0.9rem;
-      }
-
-      .form-group input,
-      .form-group textarea {
-        width: 100%;
-        padding: 12px 16px;
-        border: 1.5px solid #c8e6c8;
-        border-radius: 10px;
-        font-size: 0.95rem;
-        font-family: inherit;
-        background: #f8fdf8;
-        transition: border-color 0.2s;
-        outline: none;
-      }
-
-      .form-group input:focus,
-      .form-group textarea:focus {
-        border-color: #2d6a2d;
-        background: #fff;
-      }
-
-      .form-group textarea {
-        resize: vertical;
-        min-height: 140px;
-      }
-
-      .btn-submit {
-        width: 100%;
-        background: #2d6a2d;
-        color: #fff;
-        border: none;
-        padding: 14px;
-        border-radius: 25px;
-        font-size: 1rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: background 0.2s;
-      }
-
-      .btn-submit:hover { background: #1e4d1e; }
-
-      .footer {
-        background: #1a4a1a;
-        color: rgba(255,255,255,0.8);
-        text-align: center;
-        padding: 28px 40px;
-        font-size: 0.9rem;
-        margin-top: 60px;
-      }
+      html, body { margin:0; padding:0; font-family:'Segoe UI',Arial,sans-serif; background-color:#f4f9f4; color:#1a1a1a; }
+      .navbar { width:100%; background-color:#ffffff; border-bottom:2px solid #d4edda; padding:0 40px; display:flex; align-items:center; justify-content:space-between; height:64px; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+      .logo { font-size:1.4rem; font-weight:800; color:#2d6a2d; text-decoration:none; }
+      .nav-links { list-style:none; display:flex; gap:28px; margin:0; padding:0; }
+      .nav-links a { text-decoration:none; color:#444; font-size:0.95rem; font-weight:500; transition:color 0.2s; }
+      .nav-links a:hover, .nav-links a.active { color:#2d6a2d; }
+      .btn-donate { background:#2d6a2d; color:#fff; padding:10px 22px; border-radius:25px; text-decoration:none; font-weight:700; font-size:0.9rem; }
+      .contact-section { max-width:680px; margin:60px auto; background:#fff; border-radius:20px; padding:48px 40px; box-shadow:0 4px 24px rgba(0,0,0,0.08); border:1px solid #e0f0e0; }
+      .contact-section h1 { font-size:2rem; color:#2d6a2d; margin-bottom:8px; }
+      .contact-section p { color:#666; margin-bottom:32px; }
+      .form-group { margin-bottom:20px; }
+      .form-group label { display:block; font-weight:600; color:#333; margin-bottom:6px; font-size:0.9rem; }
+      .form-group input, .form-group textarea { width:100%; padding:12px 16px; border:1.5px solid #c8e6c8; border-radius:10px; font-size:0.95rem; font-family:inherit; background:#f8fdf8; transition:border-color 0.2s; outline:none; }
+      .form-group input:focus, .form-group textarea:focus { border-color:#2d6a2d; background:#fff; }
+      .form-group textarea { resize:vertical; min-height:140px; }
+      .btn-submit { width:100%; background:#2d6a2d; color:#fff; border:none; padding:14px; border-radius:25px; font-size:1rem; font-weight:700; cursor:pointer; transition:background 0.2s; }
+      .btn-submit:hover { background:#1e4d1e; }
+      .footer { background:#1a4a1a; color:rgba(255,255,255,0.8); text-align:center; padding:28px 40px; font-size:0.9rem; margin-top:60px; }
+      .footer a { color:inherit; }
     </style>
   </head>
   <body>
-
     <nav class="navbar">
       <a href="acasa.html" class="logo">⚡ STOP RISIPA</a>
       <ul class="nav-links">
         <li><a href="acasa.html">ACASĂ</a></li>
         <li><a href="index.html">CARAVANA</a></li>
-        <li><a href="#">DESPRE RISIPĂ</a></li>
-        <li><a href="#">SFATURI &amp; REȚETE</a></li>
-        <li><a href="#">IMPLICĂ-TE</a></li>
+        <li><a href="despre.html">DESPRE RISIPĂ</a></li>
+        <li><a href="sfaturi.html">SFATURI &amp; REȚETE</a></li>
+        <li><a href="implica-te.html">IMPLICĂ-TE</a></li>
         <li><a href="contact.html" class="active">CONTACT</a></li>
       </ul>
-      <a href="#" class="btn-donate">DONEAZĂ ACUM</a>
+      <a href="contact.html" class="btn-donate">DONEAZĂ ACUM</a>
     </nav>
 
     <section class="contact-section">
       <h1>📧 Contactează-ne</h1>
       <p>Ai întrebări sau vrei să te implici? Scrie-ne!</p>
-
       <form>
-        <div class="form-group">
-          <label>Nume complet</label>
-          <input type="text" placeholder="Ex: Ion Popescu" />
-        </div>
-        <div class="form-group">
-          <label>Adresa de email</label>
-          <input type="email" placeholder="ex@email.com" />
-        </div>
-        <div class="form-group">
-          <label>Subiect</label>
-          <input type="text" placeholder="Subiectul mesajului" />
-        </div>
-        <div class="form-group">
-          <label>Mesaj</label>
-          <textarea placeholder="Scrie mesajul tău aici..."></textarea>
-        </div>
+        <div class="form-group"><label>Nume complet</label><input type="text" placeholder="Ex: Ion Popescu" /></div>
+        <div class="form-group"><label>Adresa de email</label><input type="email" placeholder="ex@email.com" /></div>
+        <div class="form-group"><label>Subiect</label><input type="text" placeholder="Subiectul mesajului" /></div>
+        <div class="form-group"><label>Mesaj</label><textarea placeholder="Scrie mesajul tău aici..."></textarea></div>
         <button type="submit" class="btn-submit">📨 Trimite Mesajul</button>
       </form>
     </section>
 
     <footer class="footer">
-      <p>© 2026 Stop Risipa Alimentară | Împreună reducem risipa</p>
+      <p>© 2026 Stop Risipa Alimentară · <a href="acasa.html">Acasă</a> · <a href="index.html">Caravana</a> · <a href="despre.html">Despre</a> · <a href="sfaturi.html">Sfaturi</a> · <a href="implica-te.html">Implică-te</a></p>
     </footer>
-
   </body>
 </html>

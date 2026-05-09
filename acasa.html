@@ -5,338 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acasa - Stop Risipa</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <style>
       *, *::before, *::after { box-sizing: border-box; }
-
-      html, body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Segoe UI', Arial, sans-serif;
-        background-color: #f4f9f4;
-        color: #1a1a1a;
-      }
-
-  
-
-      .navbar {
-        width: 100%;
-        background-color: #ffffff;
-        border-bottom: 2px solid #d4edda;
-        padding: 0 40px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 64px;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      }
-
-      .logo {
-        font-size: 1.4rem;
-        font-weight: 800;
-        color: #2d6a2d;
-        letter-spacing: 1px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        text-decoration: none;
-      }
-
-      .nav-links {
-        list-style: none;
-        display: flex;
-        gap: 28px;
-        margin: 0;
-        padding: 0;
-      }
-
-      .nav-links a {
-        text-decoration: none;
-        color: #444;
-        font-size: 0.95rem;
-        font-weight: 500;
-        transition: color 0.2s;
-      }
-
-      .nav-links a:hover,
-      .nav-links a.active {
-        color: #2d6a2d;
-      }
-
-      .btn-donate {
-        background: #2d6a2d;
-        color: #fff;
-        padding: 10px 22px;
-        border-radius: 25px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 0.9rem;
-        transition: background 0.2s;
-      }
-
-      .btn-donate:hover {
-        background: #1e4d1e;
-      }
-
-      /* HERO */
-      .hero {
-        position: relative;
-        background: linear-gradient(135deg, #1a4a1a 0%, #2d8a2d 50%, #4aaa4a 100%);
-        color: #fff;
-        padding: 100px 40px 80px;
-        text-align: center;
-        overflow: hidden;
-      }
-
-      .hero::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(ellipse at center, rgba(255,255,255,0.05) 0%, transparent 70%);
-        animation: pulse 4s ease-in-out infinite;
-      }
-
-      @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-      }
-
-      .hero-badge {
-        display: inline-block;
-        background: rgba(255,255,255,0.15);
-        border: 1px solid rgba(255,255,255,0.3);
-        padding: 8px 20px;
-        border-radius: 25px;
-        font-size: 0.85rem;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        margin-bottom: 24px;
-      }
-
-      .hero h1 {
-        font-size: clamp(2rem, 5vw, 3.5rem);
-        font-weight: 900;
-        margin: 0 0 20px;
-        line-height: 1.1;
-        text-shadow: 0 2px 20px rgba(0,0,0,0.3);
-      }
-
-      .hero p {
-        font-size: 1.2rem;
-        opacity: 0.9;
-        max-width: 600px;
-        margin: 0 auto 40px;
-      }
-
-      .hero-buttons {
-        display: flex;
-        gap: 16px;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      .btn-primary {
-        background: #fff;
-        color: #2d6a2d;
-        padding: 14px 32px;
-        border-radius: 30px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 1rem;
-        transition: all 0.2s;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-      }
-
-      .btn-secondary {
-        background: transparent;
-        color: #fff;
-        padding: 14px 32px;
-        border-radius: 30px;
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 1rem;
-        border: 2px solid rgba(255,255,255,0.6);
-        transition: all 0.2s;
-      }
-
-      .btn-secondary:hover {
-        background: rgba(255,255,255,0.1);
-      }
-
-      /* STATS */
-      .stats-section {
-        background: #fff;
-        padding: 60px 40px;
-        text-align: center;
-      }
-
-      .stats-section h2 {
-        font-size: 1.8rem;
-        color: #2d6a2d;
-        margin-bottom: 12px;
-      }
-
-      .stats-section p {
-        color: #666;
-        font-size: 1rem;
-        margin-bottom: 48px;
-      }
-
-      .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 24px;
-        max-width: 1100px;
-        margin: 0 auto;
-      }
-
-      .stat-card {
-        background: linear-gradient(135deg, #f0faf0, #e8f5e8);
-        border-radius: 16px;
-        padding: 32px 24px;
-        border: 1px solid #c8e6c8;
-        transition: transform 0.2s, box-shadow 0.2s;
-      }
-
-      .stat-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 24px rgba(45,106,45,0.15);
-      }
-
-      .stat-number {
-        font-size: 2.5rem;
-        font-weight: 900;
-        color: #2d6a2d;
-        margin-bottom: 8px;
-      }
-
-      .stat-label {
-        color: #555;
-        font-size: 0.95rem;
-        line-height: 1.4;
-      }
-
-      /* CHARTS */
-      .charts-section {
-        background: #f4f9f4;
-        padding: 60px 40px;
-      }
-
-      .charts-section h2 {
-        text-align: center;
-        font-size: 1.8rem;
-        color: #2d6a2d;
-        margin-bottom: 8px;
-      }
-
-      .charts-section > p {
-        text-align: center;
-        color: #666;
-        margin-bottom: 48px;
-      }
-
-      .charts-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-        gap: 32px;
-        max-width: 1100px;
-        margin: 0 auto;
-      }
-
-      .chart-card {
-        background: #fff;
-        border-radius: 16px;
-        padding: 28px;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-        border: 1px solid #e0f0e0;
-      }
-
-      .chart-card h3 {
-        font-size: 1rem;
-        color: #333;
-        margin-bottom: 20px;
-        font-weight: 600;
-      }
-
-      /* GALLERY */
-      .gallery-section {
-        padding: 60px 40px;
-        background: #fff;
-      }
-
-      .gallery-section h2 {
-        text-align: center;
-        font-size: 1.8rem;
-        color: #2d6a2d;
-        margin-bottom: 8px;
-      }
-
-      .gallery-section > p {
-        text-align: center;
-        color: #666;
-        margin-bottom: 40px;
-      }
-
-      .gallery-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
-        max-width: 1100px;
-        margin: 0 auto;
-      }
-
-      .gallery-item {
-        border-radius: 12px;
-        overflow: hidden;
-        aspect-ratio: 4/3;
-        background: #eee;
-      }
-
-      .gallery-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.3s;
-      }
-
-      .gallery-item img:hover {
-        transform: scale(1.04);
-      }
-
-      /* FOOTER */
-      .footer {
-        background: #1a4a1a;
-        color: rgba(255,255,255,0.8);
-        text-align: center;
-        padding: 28px 40px;
-        font-size: 0.9rem;
-      }
+      html, body { margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f9f4; color: #1a1a1a; }
+      .navbar { width:100%; background-color:#ffffff; border-bottom:2px solid #d4edda; padding:0 40px; display:flex; align-items:center; justify-content:space-between; height:64px; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+      .logo { font-size:1.4rem; font-weight:800; color:#2d6a2d; letter-spacing:1px; display:flex; align-items:center; gap:8px; text-decoration:none; }
+      .nav-links { list-style:none; display:flex; gap:28px; margin:0; padding:0; }
+      .nav-links a { text-decoration:none; color:#444; font-size:0.95rem; font-weight:500; transition:color 0.2s; }
+      .nav-links a:hover, .nav-links a.active { color:#2d6a2d; }
+      .btn-donate { background:#2d6a2d; color:#fff; padding:10px 22px; border-radius:25px; text-decoration:none; font-weight:700; font-size:0.9rem; transition:background 0.2s; }
+      .btn-donate:hover { background:#1e4d1e; }
+      .hero { position:relative; background:linear-gradient(135deg,#1a4a1a 0%,#2d8a2d 50%,#4aaa4a 100%); color:#fff; padding:100px 40px 80px; text-align:center; overflow:hidden; }
+      .hero::before { content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%; background:radial-gradient(ellipse at center,rgba(255,255,255,0.05) 0%,transparent 70%); animation:pulse 4s ease-in-out infinite; }
+      @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+      .hero-badge { display:inline-block; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); padding:8px 20px; border-radius:25px; font-size:0.85rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:24px; }
+      .hero h1 { font-size:clamp(2rem,5vw,3.5rem); font-weight:900; margin:0 0 20px; line-height:1.1; text-shadow:0 2px 20px rgba(0,0,0,0.3); }
+      .hero p { font-size:1.2rem; opacity:0.9; max-width:600px; margin:0 auto 40px; }
+      .hero-buttons { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+      .btn-primary { background:#fff; color:#2d6a2d; padding:14px 32px; border-radius:30px; text-decoration:none; font-weight:700; font-size:1rem; transition:all 0.2s; box-shadow:0 4px 15px rgba(0,0,0,0.2); }
+      .btn-primary:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,0.3); }
+      .btn-secondary { background:transparent; color:#fff; padding:14px 32px; border-radius:30px; text-decoration:none; font-weight:700; font-size:1rem; border:2px solid rgba(255,255,255,0.6); transition:all 0.2s; }
+      .btn-secondary:hover { background:rgba(255,255,255,0.1); }
+      .stats-section { background:#fff; padding:60px 40px; text-align:center; }
+      .stats-section h2 { font-size:1.8rem; color:#2d6a2d; margin-bottom:12px; }
+      .stats-section p { color:#666; font-size:1rem; margin-bottom:48px; }
+      .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:24px; max-width:1100px; margin:0 auto; }
+      .stat-card { background:linear-gradient(135deg,#f0faf0,#e8f5e8); border-radius:16px; padding:32px 24px; border:1px solid #c8e6c8; transition:transform 0.2s,box-shadow 0.2s; }
+      .stat-card:hover { transform:translateY(-4px); box-shadow:0 8px 24px rgba(45,106,45,0.15); }
+      .stat-number { font-size:2.5rem; font-weight:900; color:#2d6a2d; margin-bottom:8px; }
+      .stat-label { color:#555; font-size:0.95rem; line-height:1.4; }
+      .charts-section { background:#f4f9f4; padding:60px 40px; }
+      .charts-section h2 { text-align:center; font-size:1.8rem; color:#2d6a2d; margin-bottom:8px; }
+      .charts-section > p { text-align:center; color:#666; margin-bottom:48px; }
+      .charts-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:32px; max-width:1100px; margin:0 auto; }
+      .chart-card { background:#fff; border-radius:16px; padding:28px; box-shadow:0 2px 12px rgba(0,0,0,0.06); border:1px solid #e0f0e0; }
+      .chart-card h3 { font-size:1rem; color:#333; margin-bottom:20px; font-weight:600; }
+      .gallery-section { padding:60px 40px; background:#fff; }
+      .gallery-section h2 { text-align:center; font-size:1.8rem; color:#2d6a2d; margin-bottom:8px; }
+      .gallery-section > p { text-align:center; color:#666; margin-bottom:40px; }
+      .gallery-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; max-width:1100px; margin:0 auto; }
+      .gallery-item { border-radius:12px; overflow:hidden; aspect-ratio:4/3; background:#eee; }
+      .gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform 0.3s; }
+      .gallery-item img:hover { transform:scale(1.04); }
+      .footer { background:#1a4a1a; color:rgba(255,255,255,0.8); text-align:center; padding:28px 40px; font-size:0.9rem; }
+      .footer a { color:inherit; }
     </style>
   </head>
   <body>
-
     <nav class="navbar">
       <a href="acasa.html" class="logo">⚡ STOP RISIPA</a>
       <ul class="nav-links">
         <li><a href="acasa.html" class="active">ACASĂ</a></li>
         <li><a href="index.html">CARAVANA</a></li>
-        <li><a href="#">DESPRE RISIPĂ</a></li>
-        <li><a href="#">SFATURI &amp; REȚETE</a></li>
-        <li><a href="#">IMPLICĂ-TE</a></li>
+        <li><a href="despre.html">DESPRE RISIPĂ</a></li>
+        <li><a href="sfaturi.html">SFATURI &amp; REȚETE</a></li>
+        <li><a href="implica-te.html">IMPLICĂ-TE</a></li>
         <li><a href="contact.html">CONTACT</a></li>
       </ul>
-      <a href="#" class="btn-donate">DONEAZĂ ACUM</a>
+      <a href="contact.html" class="btn-donate">DONEAZĂ ACUM</a>
     </nav>
 
     <section class="hero">
@@ -353,22 +79,10 @@
       <h2>Date care arată realitatea risipei alimentare în România</h2>
       <p>Cifre reale despre impactul risipei alimentare</p>
       <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">2.5M</div>
-          <div class="stat-label">Tone de alimente risipite anual în România</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">130kg</div>
-          <div class="stat-label">Alimente risipite per persoană pe an</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">4.2B€</div>
-          <div class="stat-label">Valoarea economică a risipei anuale</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">35%</div>
-          <div class="stat-label">Din risipă provine din gospodării</div>
-        </div>
+        <div class="stat-card"><div class="stat-number">2.5M</div><div class="stat-label">Tone de alimente risipite anual în România</div></div>
+        <div class="stat-card"><div class="stat-number">130kg</div><div class="stat-label">Alimente risipite per persoană pe an</div></div>
+        <div class="stat-card"><div class="stat-number">4.2B€</div><div class="stat-label">Valoarea economică a risipei anuale</div></div>
+        <div class="stat-card"><div class="stat-number">35%</div><div class="stat-label">Din risipă provine din gospodării</div></div>
       </div>
     </section>
 
@@ -376,22 +90,10 @@
       <h2>Date care arată realitatea risipei alimentare în România</h2>
       <p>Analiză detaliată a fenomenului</p>
       <div class="charts-grid">
-        <div class="chart-card">
-          <h3>Risipa pe sectoare (milioane tone/an)</h3>
-          <canvas id="chartSectoare"></canvas>
-        </div>
-        <div class="chart-card">
-          <h3>Categorii de alimente risipite</h3>
-          <canvas id="chartCategorii"></canvas>
-        </div>
-        <div class="chart-card">
-          <h3>Evoluția risipei alimentare (2018–2024)</h3>
-          <canvas id="chartEvolutie"></canvas>
-        </div>
-        <div class="chart-card">
-          <h3>România vs. Media UE (kg/persoană/an)</h3>
-          <canvas id="chartUE"></canvas>
-        </div>
+        <div class="chart-card"><h3>Risipa pe sectoare (milioane tone/an)</h3><canvas id="chartSectoare"></canvas></div>
+        <div class="chart-card"><h3>Categorii de alimente risipite</h3><canvas id="chartCategorii"></canvas></div>
+        <div class="chart-card"><h3>Evoluția risipei alimentare (2018–2024)</h3><canvas id="chartEvolutie"></canvas></div>
+        <div class="chart-card"><h3>România vs. Media UE (kg/persoană/an)</h3><canvas id="chartUE"></canvas></div>
       </div>
     </section>
 
@@ -399,80 +101,21 @@
       <h2>Momente din misiunea noastră</h2>
       <p>de a reduce risipa alimentară</p>
       <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="cluj.jpg" alt="Cluj-Napoca" />
-        </div>
-        <div class="gallery-item">
-          <img src="bucuresti.jpg" alt="București" />
-        </div>
-        <div class="gallery-item">
-          <img src="constanta.jpg" alt="Constanța" />
-        </div>
+        <div class="gallery-item"><img src="cluj.jpg" alt="Cluj-Napoca" /></div>
+        <div class="gallery-item"><img src="bucuresti.jpg" alt="București" /></div>
+        <div class="gallery-item"><img src="constanta.jpg" alt="Constanța" /></div>
       </div>
     </section>
 
     <footer class="footer">
-      <p>© 2026 Stop Risipa Alimentară | Împreună reducem risipa</p>
+      <p>© 2026 Stop Risipa Alimentară · <a href="index.html">Caravana</a> · <a href="despre.html">Despre</a> · <a href="sfaturi.html">Sfaturi</a> · <a href="implica-te.html">Implică-te</a> · <a href="contact.html">Contact</a></p>
     </footer>
 
     <script>
-      // Chart 1 - Sectoare
-      new Chart(document.getElementById('chartSectoare'), {
-        type: 'bar',
-        data: {
-          labels: ['Gospod\u0103rii', 'Restaurante', 'Retail', 'Produc\u021bie', 'Transport'],
-          datasets: [{
-            label: 'Milioane tone',
-            data: [0.88, 0.52, 0.43, 0.38, 0.29],
-            backgroundColor: ['#4CAF50','#66BB6A','#81C784','#A5D6A7','#C8E6C9']
-          }]
-        },
-        options: { responsive: true, plugins: { legend: { display: false } } }
-      });
-
-      // Chart 2 - Categorii
-      new Chart(document.getElementById('chartCategorii'), {
-        type: 'doughnut',
-        data: {
-          labels: ['Legume & Fructe', 'P\u00e2ine', 'Lactate', 'Carne', 'Altele'],
-          datasets: [{
-            data: [31, 22, 18, 15, 14],
-            backgroundColor: ['#2E7D32','#43A047','#66BB6A','#A5D6A7','#E8F5E9']
-          }]
-        },
-        options: { responsive: true }
-      });
-
-      // Chart 3 - Evolutie
-      new Chart(document.getElementById('chartEvolutie'), {
-        type: 'line',
-        data: {
-          labels: ['2018','2019','2020','2021','2022','2023','2024'],
-          datasets: [{
-            label: 'Tone risipite (milioane)',
-            data: [2.1, 2.2, 2.0, 2.3, 2.4, 2.5, 2.5],
-            borderColor: '#2d6a2d',
-            backgroundColor: 'rgba(45,106,45,0.1)',
-            fill: true,
-            tension: 0.4
-          }]
-        },
-        options: { responsive: true }
-      });
-
-      // Chart 4 - UE
-      new Chart(document.getElementById('chartUE'), {
-        type: 'bar',
-        data: {
-          labels: ['Rom\u00e2nia', 'Media UE', 'Germania', 'Fran\u021ba', 'Olanda'],
-          datasets: [{
-            label: 'kg/persoan\u0103/an',
-            data: [130, 95, 85, 102, 78],
-            backgroundColor: ['#1B5E20','#4CAF50','#81C784','#A5D6A7','#C8E6C9']
-          }]
-        },
-        options: { responsive: true, plugins: { legend: { display: false } } }
-      });
+      new Chart(document.getElementById('chartSectoare'),{type:'bar',data:{labels:['Gospod\u0103rii','Restaurante','Retail','Produc\u021bie','Transport'],datasets:[{label:'Milioane tone',data:[0.88,0.52,0.43,0.38,0.29],backgroundColor:['#4CAF50','#66BB6A','#81C784','#A5D6A7','#C8E6C9']}]},options:{responsive:true,plugins:{legend:{display:false}}}});
+      new Chart(document.getElementById('chartCategorii'),{type:'doughnut',data:{labels:['Legume & Fructe','P\u00e2ine','Lactate','Carne','Altele'],datasets:[{data:[31,22,18,15,14],backgroundColor:['#2E7D32','#43A047','#66BB6A','#A5D6A7','#E8F5E9']}]},options:{responsive:true}});
+      new Chart(document.getElementById('chartEvolutie'),{type:'line',data:{labels:['2018','2019','2020','2021','2022','2023','2024'],datasets:[{label:'Tone risipite (milioane)',data:[2.1,2.2,2.0,2.3,2.4,2.5,2.5],borderColor:'#2d6a2d',backgroundColor:'rgba(45,106,45,0.1)',fill:true,tension:0.4}]},options:{responsive:true}});
+      new Chart(document.getElementById('chartUE'),{type:'bar',data:{labels:['Rom\u00e2nia','Media UE','Germania','Fran\u021ba','Olanda'],datasets:[{label:'kg/persoan\u0103/an',data:[130,95,85,102,78],backgroundColor:['#1B5E20','#4CAF50','#81C784','#A5D6A7','#C8E6C9']}]},options:{responsive:true,plugins:{legend:{display:false}}}});
     </script>
   </body>
 </html>
