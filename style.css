@@ -1,1 +1,224 @@
-PLACEHOLDER_CSS
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Poppins', sans-serif; color: rgb(9,45,9); background: #f4f9f0; }
+
+.navbar { background: #1a5c1a; padding: 0 2rem; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+.nav-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 60px; }
+.logo { display: flex; flex-direction: column; align-items: center; line-height: 1; }
+.logo-stop { font-size: 1.4rem; font-weight: 800; color: white; letter-spacing: 2px; }
+.logo-stop .o-icon { color: #e8801a; }
+.logo-sub { font-size: 0.55rem; color: #c8e8b0; letter-spacing: 2px; }
+.nav-links { list-style: none; display: flex; gap: 1.5rem; align-items: center; }
+.nav-links li a { color: #c8e8b0; text-decoration: none; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.5px; transition: color 0.2s; text-align: center; }
+.nav-links li a.active { color: white; border-bottom: 2px solid #e8801a; padding-bottom: 2px; }
+.nav-links li a:hover { color: white; }
+.btn-donate { background: #e8801a; color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.75rem; font-weight: 700; transition: background 0.2s, transform 0.2s; white-space: nowrap; }
+.btn-donate:hover { background: #c96a10; transform: scale(1.04); }
+
+.hero-caravana { background: linear-gradient(135deg, #1a5c1a 0%, #2d8a2d 100%); padding: 3rem 2rem 2rem; text-align: center; }
+.hero-caravana h1 { color: white; font-size: clamp(1.6rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+
+.harta-section { background: #e8f4e0; padding: 2rem; text-align: center; }
+.harta-section h2 { color: rgb(9,45,9); font-size: 1.2rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 1.5rem; text-transform: uppercase; }
+.harta-wrapper { max-width: 900px; margin: 0 auto; }
+
+.harta-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  background: #d6ecc0;
+  border-radius: 16px;
+  overflow: visible;
+  box-shadow: 0 4px 24px rgba(9,45,9,0.13);
+  margin-bottom: 1.5rem;
+  line-height: 0;
+}
+
+.romania-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+}
+
+.route-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  border-radius: 16px;
+  z-index: 1;
+}
+
+/* === CITY PINS === */
+.city-pin {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  padding-bottom: 4px;
+}
+
+.caravan-wrap {
+  width: 58px;
+  filter: drop-shadow(0 3px 8px rgba(0,0,0,0.28));
+  transition: transform 0.2s cubic-bezier(.34,1.56,.64,1);
+  line-height: 1;
+}
+
+.city-pin:hover .caravan-wrap {
+  transform: scale(1.25) translateY(-5px);
+}
+
+.caravan-wrap.grayscale {
+  filter: grayscale(0.85) drop-shadow(0 2px 5px rgba(0,0,0,0.18));
+  opacity: 0.65;
+}
+
+.caravan-wrap.orange-tint {
+  filter: drop-shadow(0 3px 8px rgba(232,128,26,0.35)) brightness(0.92) saturate(1.2);
+  opacity: 0.82;
+}
+
+.pin-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: rgb(9,45,9);
+  background: rgba(255,255,255,0.92);
+  padding: 1px 8px;
+  border-radius: 10px;
+  margin-top: 4px;
+  white-space: nowrap;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  line-height: 1.5;
+}
+
+.live-label { color: #1a5c1a; font-weight: 800; }
+
+.live-badge {
+  background: #1a7a1a;
+  color: white;
+  font-size: 0.58rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+  animation: blink 1.4s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.live-pin .caravan-wrap::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: rgba(26,122,26,0.18);
+  transform: translate(-50%,-50%);
+  animation: ripple 2s infinite;
+  z-index: -1;
+}
+
+@keyframes ripple {
+  0%   { transform: translate(-50%,-50%) scale(0.7); opacity: 0.8; }
+  100% { transform: translate(-50%,-50%) scale(2.2); opacity: 0; }
+}
+
+/* === TOOLTIP - pure CSS hover === */
+.pin-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  transition: opacity 0.18s, transform 0.18s;
+  background: white;
+  border: 2px solid #2d7d2d;
+  border-radius: 12px;
+  padding: 11px 14px;
+  min-width: 195px;
+  max-width: 220px;
+  box-shadow: 0 8px 24px rgba(9,45,9,0.18);
+  z-index: 999;
+  font-family: 'Poppins', sans-serif;
+  text-align: left;
+  pointer-events: none;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.pin-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-top-color: #2d7d2d;
+}
+
+.city-pin:hover .pin-tooltip {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Tooltip variants */
+.pin-tooltip.tooltip-left {
+  left: auto;
+  right: calc(100% + 12px);
+  bottom: 0;
+  transform: translateY(0);
+}
+.pin-tooltip.tooltip-left::after { display: none; }
+.city-pin:hover .pin-tooltip.tooltip-left { transform: translateY(0); }
+
+.pin-tooltip.tooltip-up {
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+}
+.city-pin:hover .pin-tooltip.tooltip-up {
+  transform: translateX(-50%) translateY(0);
+}
+
+.tt-status { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 4px; }
+.past-color { color: #777; }
+.live-color { color: #1a7a1a; }
+.future-color { color: #e8801a; }
+.tt-city { font-size: 0.98rem; font-weight: 800; color: rgb(9,45,9); margin-bottom: 5px; }
+.tt-row { font-size: 0.78rem; color: #3a5a3a; margin-bottom: 3px; }
+.tt-desc { font-size: 0.73rem; color: #5a7a5a; margin-top: 6px; border-top: 1px solid #d0e8c0; padding-top: 5px; }
+
+/* === TIMELINE === */
+.timeline { display: flex; align-items: flex-start; justify-content: center; position: relative; padding: 1rem 0; }
+.timeline-line { position: absolute; top: 22px; left: 5%; right: 5%; height: 3px; background: #b0d090; z-index: 0; }
+.stop { display: flex; flex-direction: column; align-items: center; flex: 1; position: relative; z-index: 1; gap: 0.3rem; }
+.stop-dot { width: 18px; height: 18px; border-radius: 50%; background: #b0c8a0; border: 3px solid white; box-shadow: 0 0 0 2px #b0c8a0; }
+.stop-dot.active { background: #2d7d2d; box-shadow: 0 0 0 3px #2d7d2d, 0 0 10px rgba(45,125,45,0.4); width: 22px; height: 22px; }
+.stop-dot.next { background: #e8801a; box-shadow: 0 0 0 2px #e8801a; }
+.stop-name { font-size: 0.68rem; font-weight: 700; color: rgb(9,45,9); text-transform: uppercase; text-align: center; }
+.stop-status { font-size: 0.6rem; color: #5a8a5a; }
+.stop.current .stop-name { color: #2d7d2d; font-weight: 800; }
+
+/* === REGULAMENT === */
+.regulament { background: white; padding: 3rem 2rem; text-align: center; }
+.regulament h2 { color: rgb(9,45,9); font-size: 1.4rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2rem; }
+.regulament-grid { max-width: 800px; margin: 0 auto; display: flex; gap: 2rem; align-items: flex-start; justify-content: center; }
+.reg-col { flex: 1; background: #f4f9f0; border-radius: 12px; padding: 1.5rem; }
+.reg-col h3 { font-size: 0.85rem; font-weight: 700; color: rgb(9,45,9); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem; border-bottom: 2px solid #2d7d2d; padding-bottom: 0.5rem; }
+.reg-col.rejected h3 { border-bottom-color: #c0392b; }
+.food-icons { display: flex; flex-direction: column; gap: 0.6rem; }
+.food-item { background: white; border-radius: 8px; padding: 0.5rem 1rem; font-size: 0.85rem; color: rgb(9,45,9); text-align: left; box-shadow: 0 1px 4px rgba(9,45,9,0.08); border-left: 3px solid #2d7d2d; }
+.food-item.rejected-item { border-left-color: #c0392b; color: #7a2020; }
+.reg-divider { width: 2px; background: #d0e8c0; align-self: stretch; border-radius: 2px; }
+
+.footer { background: #1a5c1a; color: #c8e8b0; text-align: center; padding: 1.2rem; font-size: 0.8rem; letter-spacing: 0.5px; }
