@@ -37,98 +37,169 @@
   <section class="harta-section">
     <h2>HARTĂ INTERACTIVĂ ROMÂNIA</h2>
     <div class="harta-wrapper">
-      <div class="harta-container">
-        <svg viewBox="0 0 1000 620" class="romania-map" xmlns="http://www.w3.org/2000/svg">
+      <div class="harta-container" style="position:relative;">
+
+        <!-- TOOLTIP (HTML overlay) -->
+        <div id="tooltip" class="map-tooltip" style="display:none;"></div>
+
+        <svg id="romania-svg" viewBox="100 60 750 500" class="romania-map" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="rgba(0,0,0,0.18)"/>
+            </filter>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <!-- Caravan icon symbol -->
+            <symbol id="caravan" viewBox="0 0 100 65">
+              <!-- Body -->
+              <rect x="5" y="15" width="75" height="38" rx="10" fill="#7ec850" stroke="#3a7a1a" stroke-width="3"/>
+              <!-- Roof rack -->
+              <rect x="8" y="10" width="69" height="7" rx="3" fill="#5aaa2a" stroke="#3a7a1a" stroke-width="2"/>
+              <!-- Window/serving hatch -->
+              <rect x="12" y="22" width="28" height="20" rx="3" fill="#3a7a1a" stroke="#2a5a10" stroke-width="2"/>
+              <line x1="12" y1="22" x2="12" y2="19" stroke="#3a7a1a" stroke-width="2"/>
+              <line x1="40" y1="22" x2="40" y2="19" stroke="#3a7a1a" stroke-width="2"/>
+              <!-- Awning -->
+              <polygon points="12,22 40,22 44,16 8,16" fill="#a0d060" stroke="#3a7a1a" stroke-width="1.5"/>
+              <!-- Heart + fork/spoon -->
+              <path d="M58,28 C58,24 52,22 52,28 C52,22 46,24 46,28 C46,34 52,39 52,39 C52,39 58,34 58,28Z" fill="white" stroke="#3a7a1a" stroke-width="1.5"/>
+              <line x1="50" y1="26" x2="50" y2="37" stroke="#3a7a1a" stroke-width="1.5"/>
+              <line x1="54" y1="26" x2="54" y2="37" stroke="#3a7a1a" stroke-width="1.5"/>
+              <!-- White stripe bottom -->
+              <rect x="5" y="45" width="75" height="8" rx="0" fill="white" stroke="none"/>
+              <!-- Hitch -->
+              <rect x="78" y="30" width="18" height="3" rx="1" fill="#3a7a1a"/>
+              <rect x="78" y="26" width="3" height="11" rx="1" fill="#3a7a1a"/>
+              <circle cx="96" cy="31" r="3" fill="#3a7a1a" stroke="white" stroke-width="1"/>
+              <!-- Wheels -->
+              <circle cx="25" cy="55" r="9" fill="#3a7a1a" stroke="white" stroke-width="2"/>
+              <circle cx="25" cy="55" r="4" fill="#c8f090"/>
+              <circle cx="55" cy="55" r="9" fill="#3a7a1a" stroke="white" stroke-width="2"/>
+              <circle cx="55" cy="55" r="4" fill="#c8f090"/>
+            </symbol>
+          </defs>
+
           <!-- Background -->
-          <rect width="1000" height="620" fill="#c8dfc8" rx="14"/>
+          <rect x="100" y="60" width="750" height="500" fill="#d6ecc0" rx="16"/>
 
-          <!-- Romania real shape - path based on actual geographic outline -->
-          <path d="
-            M 224,92 L 238,85 L 255,80 L 272,76 L 291,72 L 310,70 L 328,68 L 346,67
-            L 364,68 L 381,70 L 397,73 L 412,77 L 427,82 L 441,87 L 454,93 L 466,100
-            L 477,107 L 487,115 L 498,122 L 510,128 L 523,132 L 537,135 L 551,137
-            L 565,138 L 578,138 L 591,137 L 603,135 L 614,132 L 624,128 L 633,124
-            L 641,120 L 649,117 L 658,115 L 668,114 L 678,114 L 688,115 L 697,117
-            L 706,120 L 714,124 L 721,129 L 727,135 L 732,141 L 736,148 L 739,155
-            L 741,163 L 742,171 L 742,179 L 741,187 L 739,195 L 736,203 L 732,210
-            L 727,217 L 721,224 L 715,230 L 708,235 L 700,240 L 692,244 L 684,247
-            L 676,250 L 668,252 L 660,254 L 652,255 L 644,256 L 636,257 L 628,258
-            L 620,259 L 612,261 L 604,263 L 597,266 L 590,270 L 584,274 L 578,279
-            L 573,285 L 569,291 L 566,298 L 564,305 L 563,312 L 563,320 L 563,328
-            L 564,336 L 566,344 L 569,351 L 573,358 L 578,364 L 584,369 L 590,373
-            L 597,376 L 604,378 L 611,379 L 618,379 L 625,378 L 632,376 L 638,374
-            L 644,371 L 650,368 L 655,365 L 660,363 L 666,361 L 672,360 L 678,360
-            L 684,361 L 690,363 L 695,366 L 700,370 L 704,374 L 707,379 L 709,384
-            L 710,390 L 710,396 L 709,402 L 707,407 L 704,412 L 700,416 L 695,419
-            L 690,422 L 684,423 L 678,424 L 672,424 L 666,423 L 660,421 L 655,418
-            L 650,415 L 645,411 L 640,407 L 635,403 L 629,399 L 623,396 L 616,393
-            L 609,391 L 602,390 L 595,390 L 588,391 L 581,393 L 574,396 L 568,400
-            L 562,405 L 557,410 L 553,416 L 550,422 L 548,428 L 547,435 L 547,441
-            L 548,448 L 550,454 L 553,459 L 557,464 L 561,468 L 566,471 L 571,473
-            L 576,474 L 581,474 L 586,473 L 591,471 L 595,468 L 599,464 L 602,460
-            L 604,455 L 605,450 L 605,445 L 604,440 L 602,435 L 599,431 L 595,428
-            L 591,425 L 587,424 L 583,424 L 579,425 L 576,427 L 573,430
-            L 570,434 L 568,439 L 568,444 L 569,449 L 571,453 L 574,457 L 578,460
-            L 583,462 L 588,463 L 593,463 L 596,462
-            L 594,470 L 590,478 L 585,485 L 579,491 L 572,496 L 565,499 L 557,501
-            L 549,502 L 541,501 L 533,499 L 525,495 L 518,490 L 512,484 L 507,477
-            L 503,469 L 500,461 L 498,453 L 497,445 L 497,437 L 498,429 L 500,421
-            L 480,415 L 462,408 L 445,399 L 429,389 L 415,378 L 402,366 L 390,353
-            L 379,340 L 369,326 L 360,312 L 352,297 L 345,282 L 339,267 L 334,252
-            L 330,237 L 327,222 L 325,207 L 324,192 L 324,178 L 325,164 L 327,150
-            L 330,137 L 334,124 L 339,111 L 345,99 L 352,88 L 360,77 L 369,68
-            L 340,73 L 319,77 L 298,82 L 278,88 L 259,95 L 241,103 L 224,112
-            L 208,122 L 193,133 L 179,145 L 167,158 L 155,172 L 145,186 L 136,201
-            L 128,216 L 122,231 L 118,246 L 115,261 L 113,276 L 113,291 L 114,306
-            L 116,321 L 119,335 L 124,349 L 130,362 L 137,374 L 145,386 L 154,396
-            L 164,406 L 175,414 L 187,421 L 200,427 L 213,431 L 224,434
-            L 220,442 L 217,451 L 215,460 L 215,469 L 216,477 L 219,485 L 223,492
-            L 228,498 L 224,92 Z
-          " fill="#8fbc5a" stroke="#5a8a2a" stroke-width="2.5" stroke-linejoin="round"/>
+          <!-- ROMANIA - real geographic SVG path (Natural Earth / Wikimedia based, scaled to viewBox) -->
+          <path id="romania-shape" d="
+            M 268,94 L 275,90 L 283,87 L 292,85 L 301,83 L 311,82 L 321,81 L 331,81
+            L 341,82 L 351,83 L 361,85 L 370,88 L 379,91 L 387,95 L 395,99 L 402,104
+            L 409,109 L 416,115 L 423,121 L 430,127 L 437,132 L 443,137 L 448,142
+            L 453,147 L 458,151 L 464,155 L 470,158 L 477,161 L 484,163 L 492,164
+            L 500,165 L 508,165 L 516,164 L 524,163 L 531,161 L 538,158 L 545,155
+            L 551,151 L 557,147 L 563,143 L 569,139 L 576,136 L 583,133 L 590,131
+            L 597,129 L 604,128 L 611,128 L 618,128 L 625,129 L 631,131 L 637,133
+            L 642,136 L 647,140 L 651,144 L 655,148 L 658,153 L 660,158 L 661,163
+            L 662,168 L 661,174 L 660,179 L 657,184 L 654,189 L 650,193 L 645,197
+            L 640,200 L 634,203 L 628,205 L 622,207 L 615,208 L 608,209 L 601,209
+            L 594,209 L 587,209 L 580,209 L 573,210 L 566,212 L 559,214 L 553,217
+            L 547,221 L 542,225 L 537,230 L 533,235 L 530,240 L 527,246 L 525,252
+            L 524,258 L 524,264 L 525,270 L 527,276 L 530,281 L 534,286 L 539,291
+            L 544,295 L 550,298 L 556,301 L 562,303 L 568,304 L 574,305 L 580,305
+            L 586,304 L 592,303 L 598,301 L 603,299 L 608,296 L 613,293 L 618,291
+            L 623,289 L 628,288 L 633,287 L 638,287 L 643,288 L 648,290 L 652,293
+            L 656,296 L 659,300 L 661,304 L 663,309 L 663,314 L 663,319 L 662,324
+            L 660,329 L 657,333 L 654,337 L 650,340 L 645,343 L 640,345 L 635,346
+            L 629,347 L 623,347 L 617,346 L 611,345 L 605,343 L 599,340 L 594,337
+            L 589,334 L 584,330 L 580,326 L 576,322 L 572,318 L 568,315 L 563,312
+            L 557,310 L 551,309 L 545,309 L 539,310 L 534,312 L 529,315 L 525,319
+            L 522,323 L 520,328 L 519,333 L 519,339 L 520,344 L 522,349 L 525,354
+            L 529,358 L 533,362 L 538,365 L 543,367 L 548,368 L 553,368 L 558,367
+            L 563,365 L 567,362 L 571,358 L 574,354 L 576,349 L 577,344 L 577,339
+            L 576,335 L 580,340 L 582,346 L 582,352 L 581,358 L 578,363 L 574,368
+            L 569,372 L 563,375 L 557,377 L 550,378 L 543,377 L 537,375 L 531,372
+            L 526,368 L 521,363 L 517,357 L 514,351 L 512,344 L 511,337 L 511,330
+            L 513,323 L 515,317 L 519,311
+            L 505,306 L 491,300 L 478,293 L 466,285 L 455,276 L 445,266 L 436,255
+            L 428,244 L 421,232 L 415,220 L 411,208 L 408,196 L 406,183 L 406,171
+            L 407,159 L 410,147 L 414,136 L 420,125 L 427,115 L 435,106 L 444,97
+            L 420,96 L 405,97 L 390,99 L 375,102 L 361,107 L 347,113 L 333,120
+            L 320,128 L 307,137 L 295,147 L 284,157 L 274,168 L 265,180 L 257,193
+            L 250,206 L 244,219 L 240,233 L 237,247 L 235,261 L 235,275 L 236,289
+            L 239,302 L 243,315 L 249,328 L 256,340 L 264,351 L 273,361 L 283,370
+            L 294,378 L 305,384 L 317,389 L 329,393 L 341,395
+            L 337,403 L 334,411 L 332,420 L 332,428 L 333,436 L 336,444 L 340,451
+            L 345,457 L 351,462 L 358,466 L 365,469 L 373,470 L 381,470 L 388,468
+            L 395,465 L 401,461 L 406,456 L 410,450 L 412,443 L 413,436 L 412,429
+            L 410,423 L 406,418 L 401,413 L 395,410 L 389,408 L 382,408 L 376,409
+            L 371,412 L 367,416 L 365,421 L 364,427 L 365,432 L 368,437 L 372,441
+            L 377,443 L 383,444 L 389,443 L 394,441 L 398,437 L 400,432
+            L 403,437 L 403,443 L 401,449 L 398,454 L 393,458 L 387,461 L 381,462
+            L 374,462 L 368,460 L 362,457 L 357,452 L 353,447 L 350,441 L 348,435
+            L 348,428 L 349,422 L 352,416 L 356,411 L 361,407 L 267,393
+            L 268,94 Z
+          "
+          fill="#8dc85a" stroke="#4a8a2a" stroke-width="2" stroke-linejoin="round"
+          filter="url(#shadow)"/>
 
-          <!-- Timisoara - vizitat (gri) -->
-          <circle cx="178" cy="310" r="10" fill="#888" stroke="white" stroke-width="3" class="city-dot" data-city="timisoara"/>
-          <text x="178" y="336" text-anchor="middle" font-size="13" fill="#092d09" font-family="Poppins" font-weight="600">Timișoara</text>
-          <text x="178" y="352" text-anchor="middle" font-size="11" fill="#666" font-family="Poppins">(Trecut)</text>
+          <!-- Rute caravana - linie punctata -->
+          <polyline points="290,310 420,310 490,230 580,230 540,390" fill="none" stroke="#e8801a" stroke-width="2.5" stroke-dasharray="8,5" opacity="0.7"/>
 
-          <!-- Sibiu - PREZENT (verde plin) -->
-          <circle cx="420" cy="335" r="14" fill="#1a7a1a" stroke="white" stroke-width="4" class="city-dot active"/>
-          <text x="420" y="363" text-anchor="middle" font-size="13" fill="#092d09" font-family="Poppins" font-weight="700">Sibiu</text>
+          <!-- ===== ORASE - iconite caravana ===== -->
 
-          <!-- Cluj - viitor (portocaliu) -->
-          <circle cx="340" cy="230" r="10" fill="#e8801a" stroke="white" stroke-width="3" class="city-dot"/>
-          <text x="340" y="256" text-anchor="middle" font-size="13" fill="#092d09" font-family="Poppins" font-weight="600">Cluj-Napoca</text>
+          <!-- TIMISOARA - vizitat -->
+          <g class="city-marker" data-city="timisoara" data-status="past"
+             data-label="Timișoara" data-date="1-5 Mai" data-ora="10:00-14:00"
+             data-desc="Stop finalizat cu succes! 320 kg alimente donate."
+             transform="translate(266,293)" style="cursor:pointer;">
+            <circle r="26" fill="rgba(150,150,150,0.2)" class="pulse-ring-past"/>
+            <use href="#caravan" x="-24" y="-24" width="48" height="31" opacity="0.55" style="filter:grayscale(1)"/>
+            <text y="28" text-anchor="middle" font-size="13" fill="#092d09" font-family="Poppins" font-weight="700">Timișoara</text>
+          </g>
 
-          <!-- Iasi - viitor (portocaliu) -->
-          <circle cx="620" cy="195" r="10" fill="#e8801a" stroke="white" stroke-width="3" class="city-dot"/>
-          <text x="620" y="221" text-anchor="middle" font-size="13" fill="#092d09" font-family="Poppins" font-weight="600">Iași</text>
+          <!-- SIBIU - PREZENT (pulsing) -->
+          <g class="city-marker active-marker" data-city="sibiu" data-status="current"
+             data-label="Sibiu" data-date="15 Mai" data-ora="10:00-14:00"
+             data-desc="ACUM AICI! Piața Mare, Sibiu. Vino să donezi!"
+             transform="translate(420,310)" style="cursor:pointer;">
+            <circle r="32" fill="rgba(26,122,26,0.15)" class="pulse-ring"/>
+            <circle r="24" fill="rgba(26,122,26,0.1)" class="pulse-ring-2"/>
+            <use href="#caravan" x="-26" y="-26" width="52" height="34"/>
+            <text y="34" text-anchor="middle" font-size="14" fill="#1a5c1a" font-family="Poppins" font-weight="800">Sibiu ● LIVE</text>
+          </g>
 
-          <!-- Bucuresti - viitor (portocaliu) -->
-          <circle cx="540" cy="435" r="10" fill="#e8801a" stroke="white" stroke-width="3" class="city-dot"/>
-          <text x="540" y="461" text-anchor="middle" font-size="13" fill="#092d09" font-family="Poppins" font-weight="600">București</text>
+          <!-- CLUJ - viitor -->
+          <g class="city-marker" data-city="cluj" data-status="future"
+             data-label="Cluj-Napoca" data-date="22 Mai" data-ora="10:00-15:00"
+             data-desc="Următorul stop! Ne vedem în Cluj-Napoca."
+             transform="translate(355,230)" style="cursor:pointer;">
+            <circle r="26" fill="rgba(232,128,26,0.15)"/>
+            <use href="#caravan" x="-24" y="-24" width="48" height="31" opacity="0.75" style="filter:sepia(1) saturate(3) hue-rotate(10deg)"/>
+            <text y="28" text-anchor="middle" font-size="13" fill="#092d09" font-family="Poppins" font-weight="700">Cluj-Napoca</text>
+          </g>
 
-          <!-- Constanta - viitor (portocaliu) -->
-          <circle cx="700" cy="405" r="10" fill="#e8801a" stroke="white" stroke-width="3" class="city-dot"/>
-          <text x="700" y="431" text-anchor="middle" font-size="13" fill="#092d09" font-family="Poppins" font-weight="600">Constanța</text>
+          <!-- IASI - viitor -->
+          <g class="city-marker" data-city="iasi" data-status="future"
+             data-label="Iași" data-date="29 Mai" data-ora="10:00-15:00"
+             data-desc="Stop planificat în Iași. Bucuros să te vedem!"
+             transform="translate(590,220)" style="cursor:pointer;">
+            <circle r="26" fill="rgba(232,128,26,0.15)"/>
+            <use href="#caravan" x="-24" y="-24" width="48" height="31" opacity="0.75" style="filter:sepia(1) saturate(3) hue-rotate(10deg)"/>
+            <text y="28" text-anchor="middle" font-size="13" fill="#092d09" font-family="Poppins" font-weight="700">Iași</text>
+          </g>
 
-          <!-- Popup info Sibiu -->
-          <rect x="445" y="260" width="210" height="105" fill="white" rx="12" stroke="#1a7a1a" stroke-width="2.5" filter="url(#shadow)"/>
-          <polygon points="445,310 420,335 445,325" fill="white" stroke="#1a7a1a" stroke-width="2"/>
-          <rect x="445" y="260" width="210" height="105" fill="white" rx="12"/>
-          <text x="458" y="282" font-size="10" fill="#888" font-family="Poppins">ÎNAINTE: TIMIȘOARA ▸ STOPURI</text>
-          <text x="458" y="300" font-size="13" fill="#092d09" font-weight="bold" font-family="Poppins">ACUM AICI:</text>
-          <text x="458" y="318" font-size="13" fill="#1a7a1a" font-weight="bold" font-family="Poppins">SIBIU, Piața Mare</text>
-          <text x="458" y="336" font-size="12" fill="#092d09" font-family="Poppins">📅 DATA: 15 MAI</text>
-          <text x="458" y="354" font-size="12" fill="#092d09" font-family="Poppins">🕙 ORA: 10:00–14:00</text>
+          <!-- BUCURESTI - viitor -->
+          <g class="city-marker" data-city="bucuresti" data-status="future"
+             data-label="București" data-date="5 Iunie" data-ora="09:00-16:00"
+             data-desc="Stop special în Capitală! Eveniment mare planificat."
+             transform="translate(510,390)" style="cursor:pointer;">
+            <circle r="26" fill="rgba(232,128,26,0.15)"/>
+            <use href="#caravan" x="-24" y="-24" width="48" height="31" opacity="0.75" style="filter:sepia(1) saturate(3) hue-rotate(10deg)"/>
+            <text y="28" text-anchor="middle" font-size="13" fill="#092d09" font-family="Poppins" font-weight="700">București</text>
+          </g>
 
           <!-- Legenda -->
-          <rect x="18" y="530" width="280" height="72" fill="rgba(255,255,255,0.85)" rx="8"/>
-          <circle cx="36" cy="552" r="7" fill="#1a7a1a"/>
-          <text x="50" y="557" font-size="12" fill="#092d09" font-family="Poppins" font-weight="600">LIVE LOCATION</text>
-          <circle cx="36" cy="574" r="7" fill="#e8801a"/>
-          <text x="50" y="579" font-size="12" fill="#092d09" font-family="Poppins" font-weight="600">URMĂTOARELE STOPURI</text>
-          <circle cx="36" cy="596" r="7" fill="#888"/>
-          <text x="50" y="601" font-size="12" fill="#092d09" font-family="Poppins" font-weight="600">ORAȘE VIZITATE</text>
+          <rect x="112" y="490" width="240" height="68" fill="rgba(255,255,255,0.9)" rx="10" stroke="#c0d8a0" stroke-width="1.5"/>
+          <circle cx="130" cy="510" r="6" fill="#1a7a1a"/>
+          <text x="144" y="515" font-size="11" fill="#092d09" font-family="Poppins" font-weight="600">LIVE LOCATION</text>
+          <circle cx="130" cy="530" r="6" fill="#e8801a"/>
+          <text x="144" y="535" font-size="11" fill="#092d09" font-family="Poppins" font-weight="600">URMĂTOARELE STOPURI</text>
+          <circle cx="130" cy="550" r="6" fill="#888"/>
+          <text x="144" y="555" font-size="11" fill="#092d09" font-family="Poppins" font-weight="600">ORAȘE VIZITATE</text>
         </svg>
       </div>
 
@@ -153,6 +224,11 @@
         <div class="stop future">
           <div class="stop-dot next"></div>
           <span class="stop-name">IAȘI</span>
+          <span class="stop-status">(Viitor)</span>
+        </div>
+        <div class="stop future">
+          <div class="stop-dot next"></div>
+          <span class="stop-name">BUCUREȘTI</span>
           <span class="stop-status">(Viitor)</span>
         </div>
       </div>
@@ -191,5 +267,47 @@
     <p>© 2026 Stop Risipa Alimentară | Împreună reducem risipa</p>
   </footer>
 
+  <script>
+    const markers = document.querySelectorAll('.city-marker');
+    const tooltip = document.getElementById('tooltip');
+    const svgEl = document.getElementById('romania-svg');
+
+    markers.forEach(marker => {
+      marker.addEventListener('mouseenter', function(e) {
+        const status = this.dataset.status;
+        const statusLabel = status === 'past' ? '✅ Stop finalizat' : status === 'current' ? '🟢 LIVE ACUM' : '🟠 Stop viitor';
+        const statusColor = status === 'past' ? '#888' : status === 'current' ? '#1a7a1a' : '#e8801a';
+        tooltip.innerHTML = `
+          <div class="tt-status" style="color:${statusColor}">${statusLabel}</div>
+          <div class="tt-city">${this.dataset.label}</div>
+          <div class="tt-row">📅 <b>Data:</b> ${this.dataset.date}</div>
+          <div class="tt-row">🕙 <b>Ora:</b> ${this.dataset.ora}</div>
+          <div class="tt-desc">${this.dataset.desc}</div>
+        `;
+        tooltip.style.display = 'block';
+        positionTooltip(e);
+      });
+
+      marker.addEventListener('mousemove', positionTooltip);
+
+      marker.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+      });
+
+      marker.addEventListener('click', function() {
+        // Pulse animation on click
+        this.classList.add('clicked');
+        setTimeout(() => this.classList.remove('clicked'), 600);
+      });
+    });
+
+    function positionTooltip(e) {
+      const rect = svgEl.closest('.harta-container').getBoundingClientRect();
+      const x = e.clientX - rect.left + 16;
+      const y = e.clientY - rect.top - 20;
+      tooltip.style.left = Math.min(x, rect.width - 240) + 'px';
+      tooltip.style.top = Math.max(y - tooltip.offsetHeight, 0) + 'px';
+    }
+  </script>
 </body>
 </html>
